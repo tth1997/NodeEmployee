@@ -21,7 +21,7 @@ mongoose.Promise = global.Promise;
 
 
 
-mongoose.connect('mongodb://localhost/shipping')
+mongoose.connect('mongodb://safe:safe123@localhost/safelanes')
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
