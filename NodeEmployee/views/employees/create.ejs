@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
+    <link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<link href="/stylesheets/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+	
+	
+	
+</head>
+
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-image/image/sidebar-5.jpg>
+		      <div class="sidebar-wrapper">
+		
+
+                    <div class="logo">
+                        <a target="_blank" href="http://www.safe-lanes.com" class="simple-text">
+                             <img src="/images/SafeLanes_logo.png" class="imgclass" />
+                        </a>
+                    </div>
+                    <ul class="nav">
+                        <li>
+                            <a href="/dashboard">
+                               <p>Dashboard</p>
+                            </a>
+                        </li>
+                        
+					    
+						<li class="active">
+                            <a href="/employees">
+                               <p>Employee Master</p>
+                            </a>
+                        </li>
+						
+                        <li>
+                            <a href="/vdranalysiss">
+                                <p>VDR Job Tracker</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/jobassignments">
+                               <p>Vessel Job Tracker</p>
+                            </a>
+                        </li>
+						<li>
+                            <a href="/clients">
+                               <p>Client Details</p>
+                            </a>
+                        </li>
+						<li>
+                            <a href="/observationanalysis">
+                               <p>Observation Analysis</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+ <div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div  align="right">
+                <a href="">Account</a>
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="#">Log out</a>
+            </div>
+        </div>
+	</nav>
+     
+            
+           <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h5><a href="/employees">Employee List</a></h5>
+                                   <h5>Create New Employee</h5>
+                                       
+							</div>	   
+							<div class="content">
+                              <form id ="createemp" action="/employees/save" enctype="multipart/form-data" method="post" >
+							  <input id="id1" type="hidden" name="id1" value=""/>
+							  <input id="id2" type="hidden" name="id2" value=""/>
+							  <input id="id3" type="hidden" name="id3" value=""/>
+                                <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>First Name *</label>
+                                                 <input type="text" class="form-control" placeholder="First Name" name="firstname" id="firstname">
+									   </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Last Name</label>
+                                                <input type="text" class="form-control" placeholder="Last Name" name="lastname" id="lastname">
+                                      </div>
+                                   </div>
+                                </div>
+                                
+								<div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" placeholder="Home Address" name="address" id="address">
+                                            </div>
+                                        </div>
+										 <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Office Location</label>
+                                                <input type="text" class="form-control" placeholder="Office Location" name="officelocation" id="officelocation">
+                                            </div>
+                                        </div>
+								</div>
+								<div class="row">
+										<div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Country</label>
+                                                  <select name="country" class="form-control" id="country">
+												  <option value=''>Select Country</li>
+								                   <% for(var i=0; i < country.length; i++){ %>
+												        <option value='<%= country[i] %>'><%= country[i] %></li>
+                                                   <% } %>
+							                      </select>
+									   </div>
+                                   </div>
+								   <div class="col-md-4">
+									 <div class="form-group">
+                                           <label>City </label>
+                                                  <select name="city" class="form-control" id="city">
+								                   
+							                      </select>
+									   </div>
+                                   </div>	
+                                </div>
+								
+								
+                                <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>DOB </label>
+                                                <input type="date" class="form-control" placeholder="Date Of Birth" name="dateofbirth" id="dateofbirth">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Passport/IC No *</label>
+                                                <input type="text" class="form-control" placeholder="Passport Number" name="passportno" id="passportno">
+                                            </div>
+                                        </div>
+									
+                                </div>										
+									
+                                <div class="row">
+                                   <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Date Of Joining *</label>
+                                                <input type="date" class="form-control" placeholder="Date Of Joining" name="dateofjoining" id="dateofjoining">
+                                            </div>
+                                        </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Nationality </label>
+                                                <select name="nationality" class="form-control" id="nationality">
+												 <option value=''>Select Nationality</li>
+								                 <% for(var i=0; i < nationality.objNat.length; i++){ %>
+								                   <option value='<%= nationality.objNat[i] %>'><%= nationality.objNat[i] %></li>
+                                                   <% } %>
+								                </select>
+                                      </div>
+                                   </div>
+                                 </div>
+                               								   
+								
+                                      
+          
+			                     <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Marrital Status </label>
+												
+												 <input type="radio" id="ms1"
+												   name="maritalstatus" value="married" onclick="show();">
+												  <label for="ms1">Married</label>
+
+												  <input type="radio" id="ms2"
+												   name="maritalstatus" value="unmarried" onclick="hide();">
+												  <label for="ms2">Unmarried</label>
+												
+												
+                                            </div>
+                                        </div>
+										<div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>WorkPermit Status </label>
+												<input type="text" class="form-control" placeholder="WorkPermit Status" name="permitstatus" id="permitstatus">
+                                            </div>
+                                        </div>
+								 </div>
+								 <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Comments</label>
+                                                <textarea rows="5" class="form-control" placeholder="Here can be your description" name="comment" id="comment"></textarea>
+                                            </div>
+                                        </div>
+                                 </div>
+	                            <div class="row">
+								    <div class="col-md-4">
+						               <div class="form-group">
+                                           <label>Upload Photo of Employee</label>
+                                           <input type="file" class="form-control-file" name="photo" id="photo" accept=".jpg,.jpeg,.png" onchange="validateFileType()"/>
+										   
+										   
+                                       </div>
+									</div>
+									
+									
+										   
+										   
+                                      
+						        </div>
+			                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Father Name </label>
+                                                <input type="text" class="form-control" placeholder="Father Name" name="fathername" id="fathername">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Mother Name </label>
+                                                <input type="text" class="form-control" placeholder="Mother Name" name="mothername" id="mothername">
+                                            </div>
+                                        </div>
+                                </div>			
+			                     <div class="row" id="divs">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Spouse Name </label>
+                                                <input type="text" class="form-control" placeholder="Spouse Name" name="spousename" id="spousename">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>No Of Kids </label>
+                                                <input type="number" class="form-control" placeholder="Number of kids" name="noofkids" id="noofkids">
+                                            </div>
+                                        </div>
+										
+										
+                                </div>	
+								
+								
+								
+								
+								 
+							<button type="submit" class="btn btn-info btn-fill pull-right">Save</button>
+							<div class="clearfix"></div>
+						  		
+                            </form>
+                          </div>
+                       </div>
+                    </div>
+			    
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                     <div class="modal-dialog" role="document">
+                     <div class="modal-content" >
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Visa Details</h4>
+                     </div>
+                     <div class="modal-body" style="height: 700px;overflow-y: auto;">
+					 <form id ="visaemp" action="/employees/addvisaemp" enctype="multipart/form-data" method="post" >
+                     <div class="row">
+                     <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="container">
+                                <div class="content">
+                                   <form role="form" id="newModalForm1">
+								   
+			                          <div class="row">
+                                       <div class="col-md-2">
+                                         <div class="form-group">
+                                           <label>Country *</label>
+                                                  <select name="vcountry" class="form-control" id="vcountry" required>
+												  <option value=''>Select Country</li>
+								                   <% for(var i=0; i < country.length; i++){ %>
+												        <option value='<%= country[i] %>'><%= country[i] %></li>
+                                                   <% } %>
+							                      </select>
+									   </div>
+                                   </div>
+                                   <div class="col-md-2">
+                                          <div class="form-group">
+                                            <label>Date Of Expiry *</label>
+                                            <input type="date" class="form-control" placeholder="Date Of Expiry" name="expirydate" required id="expirydate" required>
+										  </div>
+										</div>
+                                 </div>
+								 <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Type Of Visa</label>
+                                                <input type="text" class="form-control" placeholder="Type Of Visa" name="typeofvisa" id="typeofvisa" required>
+                                            </div>
+                                        </div>
+                                 
+								    <div class="col-md-2">
+						               <div class="form-group">
+                                           <label>Copy of Visa</label>
+                                           <input type="file" class="form-control-file" name="visadoc" id="visadoc" required/>
+										   
+										   
+                                       </div>
+									</div>
+						        </div>
+								<font color='red'> <DIV id="une"> </DIV> </font>
+								<button type="submit" class="btn btn-info btn-fill pull-left">Add Visa</button>
+								 
+    							 <div class="clearfix"></div>
+                                     
+		                          
+		                        </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+						 <div class="content table-responsive table-full-width">
+                            
+                            <table class="table table-hover table-striped" id="tab1">
+                                    <thead>
+									<tr>
+                                    <th>Country Of Visa</th>
+									<th>Date Of Expiry</th>
+									<th>Type Of Visa</th>
+									<th>Visa Doc</th>
+									<th>Action</th>
+                                    </tr>
+                                </thead>
+                              
+							</table>
+                               
+                        </div>							   
+		               </div>
+			        </div>
+		        </div>
+				<div class="modal-footer">
+				<input id="button2" class="btn btn-info btn-fill pull-right" type="button" data-dismiss="modal" value="Save Visa Details" />
+        
+      </div>
+                     </div>
+                     
+                    </div>
+                    </div>
+                </div>
+				
+				
+
+  </body>
+</html>
+
+
+<script type="text/javascript">
+    
+   
+   
+   
+   
+    function validateFileType(){
+	
+        var fileName = document.getElementById("photo").value;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+            //TO DO
+        }else{
+            alert("Only jpg/jpeg and png files are allowed!");
+        }   
+    }
+    function show(){
+        document.getElementById('divs').style.display ='block';
+    }
+    function hide(){
+        document.getElementById('divs').style.display = 'none';
+    }
+	function regvalidate()
+	{
+	if(document.getElementById("vcountry").value == '')
+	 {
+	  document.getElementById('une').innerHTML = "Please Select Country";
+	  document.getElementById("vcountry").focus();
+	  return(false);
+	 }
+	if(document.getElementById("expirydate").value=="")
+	  {
+	  document.getElementById('une').innerHTML = "Expiry Date cannot be blank";
+	  document.getElementById("expirydate").focus();
+	  return(false);
+	 }
+    
+    return true;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$(document).ready(function() {
+	
+	$country = $('#country');
+    $city = $('#city');
+	
+	$country.change(function() {
+    
+    $city.html(''); // Clear existing options in second dropdown
+	
+	 
+     var country_name = document.getElementById("country").value;
+	 if(country_name != ''){
+	 
+        $.ajax({
+          method: "GET",
+          url: "/employees/returncity",
+          data: { country_name: country_name },
+		  dataType: "json",
+        }).done(function( data ) {
+          var result = data;
+		  
+            $.each(result, function (data) {
+            var appenddata = "<option value = '" + result[data] + " '>" + result[data] + " </option>";
+            $('#city').html($('#city').html() + appenddata);
+             });
+            
+      });
+	  }
+	  else
+	 {
+	   $('#city').append($('<option>', {
+			value: '',
+			text: 'Select City'
+		}));
+		
+	 }
+	
+	
+    }).change();
+	
+	
+	
+    $('#createemp').bootstrapValidator({
+        container: '#messages',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            firstname: {
+                validators: {
+                    notEmpty: {
+                        message: ''
+                    }
+                }
+            },
+            
+			dateofjoining: {
+                validators: {
+                    notEmpty: {
+                        message: ''
+                    }
+                }
+            },
+            passportno: {
+                validators: {
+                    notEmpty: {
+                        message: ''
+                    }
+                }
+            }
+			
+        }
+    });
+});
+(function ($) {
+    'use strict';
+    $.fn.tableToJSON = function (opts) {
+        // Set options
+        var defaults = {
+            ignoreColumns: [],
+            onlyColumns: null,
+            ignoreHiddenRows: true,
+            headings: null,
+            allowHTML: false
+        };
+        opts = $.extend(defaults, opts);
+        var notNull = function (value) {
+            return value !== undefined && value !== null;
+        };
+        var ignoredColumn = function (index) {
+            if (notNull(opts.onlyColumns)) {
+                return $.inArray(index, opts.onlyColumns) === -1;
+            }
+            return $.inArray(index, opts.ignoreColumns) !== -1;
+        };
+        var arraysToHash = function (keys, values) {
+            var result = {}, index = 0;
+            $.each(values, function (i, value) {
+                // when ignoring columns, the header option still starts
+                // with the first defined column
+                if (index < keys.length && notNull(value)) {
+                    result[keys[index]] = value;
+                    index++;
+                }
+            });
+            return result;
+        };
+        var cellValues = function (cellIndex, cell) {
+            var value, result;
+            if (!ignoredColumn(cellIndex)) {
+                var override = $(cell).data('override');
+                if (opts.allowHTML) {
+                    value = $.trim($(cell).html());
+                } else {
+                    value = $.trim($(cell).text());
+                }
+                result = notNull(override) ? override : value;
+            }
+            return result;
+        };
+        var rowValues = function (row) {
+            var result = [];
+            $(row).children('td,th').each(function (cellIndex, cell) {
+                if (!ignoredColumn(cellIndex)) {
+                    result.push(cellValues(cellIndex, cell));
+                }
+            });
+            return result;
+        };
+        var getHeadings = function (table) {
+            var firstRow = table.find('tr:first').first();
+            return notNull(opts.headings) ? opts.headings : rowValues(firstRow);
+        };
+        var construct = function (table, headings) {
+            var i, j, len, len2, txt, $row, $cell,
+            tmpArray = [],
+                cellIndex = 0,
+                result = [];
+            table.children('tbody,*').children('tr').each(function (rowIndex, row) {
+                if (rowIndex > 0 || notNull(opts.headings)) {
+                    $row = $(row);
+                    if ($row.is(':visible') || !opts.ignoreHiddenRows) {
+                        if (!tmpArray[rowIndex]) {
+                            tmpArray[rowIndex] = [];
+                        }
+                        cellIndex = 0;
+                        $row.children().each(function () {
+                            if (!ignoredColumn(cellIndex)) {
+                                $cell = $(this);
+                                // process rowspans
+                                if ($cell.filter('[rowspan]').length) {
+                                    len = parseInt($cell.attr('rowspan'), 10) - 1;
+                                    txt = cellValues(cellIndex, $cell, []);
+                                    for (i = 1; i <= len; i++) {
+                                        if (!tmpArray[rowIndex + i]) {
+                                            tmpArray[rowIndex + i] = [];
+                                        }
+                                        tmpArray[rowIndex + i][cellIndex] = txt;
+                                    }
+                                }
+                                // process colspans
+                                if ($cell.filter('[colspan]').length) {
+                                    len = parseInt($cell.attr('colspan'), 10) - 1;
+                                    txt = cellValues(cellIndex, $cell, []);
+                                    for (i = 1; i <= len; i++) {
+                                        // cell has both col and row spans
+                                        if ($cell.filter('[rowspan]').length) {
+                                            len2 = parseInt($cell.attr('rowspan'), 10);
+                                            for (j = 0; j < len2; j++) {
+                                                tmpArray[rowIndex + j][cellIndex + i] = txt;
+                                            }
+                                        } else {
+                                            tmpArray[rowIndex][cellIndex + i] = txt;
+                                        }
+                                    }
+                                }
+                                // skip column if already defined
+                                while (tmpArray[rowIndex][cellIndex]) {
+                                    cellIndex++;
+                                }
+                                if (!ignoredColumn(cellIndex)) {
+                                    txt = tmpArray[rowIndex][cellIndex] || cellValues(cellIndex, $cell, []);
+                                    if (notNull(txt)) {
+                                        tmpArray[rowIndex][cellIndex] = txt;
+                                    }
+                                }
+                            }
+                            cellIndex++;
+                        });
+                    }
+                }
+            });
+            $.each(tmpArray, function (i, row) {
+                if (notNull(row)) {
+                    txt = arraysToHash(headings, row);
+                    result[result.length] = txt;
+                }
+            });
+            return result;
+        };
+        // Run
+        var headings = getHeadings(this);
+        return construct(this, headings);
+    };
+})(jQuery);
+</script>

@@ -1,0 +1,8 @@
+{"_id":{"$oid":"5a78487232eca40cf86ebf0b"},"Job_id":"01","Job_Category":"Audit","Job_Type":"Live Navigation Audit"}
+{"_id":{"$oid":"5a78492432eca40cf86ebf0c"},"Job_id":"02","Job_Category":"Consultancy","Job_Type":"Consultancy Service"}
+{"_id":{"$oid":"5a78496632eca40cf86ebf0d"},"Job_id":"03","Job_Category":"Audit","Job_Type":"ISO/ISM/ISPS Audit"}
+{"_id":{"$oid":"5a78498832eca40cf86ebf0e"},"Job_id":"04","Job_Category":"Inspection","Job_Type":"Consultancy Service"}
+{"_id":{"$oid":"5a7849ad32eca40cf86ebf0f"},"Job_id":"05","Job_Category":"Audit","Job_Type":"Audit Cargo and Mooring"}
+{"_id":{"$oid":"5a7849e932eca40cf86ebf10"},"Job_id":"06","Job_Category":"Audit","Job_Type":"In-port Navigation Audit"}
+{"_id":{"$oid":"5a787935481d60396426d15b"},"Job_id":"07","Job_Category":"Audit","Job_Type":"VDR Analysis"}
+{"_id":{"$oid":"5a788166481d60396426d17e"},"Job_id":"07","Job_Category":"na","Job_Type":"Navigational Assessment"}

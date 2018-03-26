@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
+    <link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+	<link href="/stylesheets/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+	
+	
+	
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-image/image/sidebar-5.jpg>
+		      <div class="sidebar-wrapper">
+		
+
+                    <div class="logo">
+                        <a target="_blank" href="http://www.safe-lanes.com" class="simple-text">
+                            <img src="/images/SafeLanes_logo.png" class="imgclass" />
+                        </a>
+                    </div>
+                    <ul class="nav">
+                        <li>
+                            <a href="/dashboard">
+                               <p>Dashboard</p>
+                            </a>
+                        </li>
+                       
+						
+						<li class="active">
+                            <a href="/employees">
+                               <p>Employee Master</p>
+                            </a>
+                        </li>
+						
+                        <li>
+                            <a href="/vdranalysiss">
+                                <p>VDR Job Tracker</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/jobassignments">
+                               <p>Vessel Job Tracker</p>
+                            </a>
+                        </li>
+						<li>
+                            <a href="/clients">
+                               <p>Client Details</p>
+                            </a>
+                        </li>
+						<li>
+                            <a href="/observationanalysis">
+                               <p>Observation Analysis</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+		
+		<div class="main-panel">
+           <nav class="navbar navbar-default navbar-fixed">
+              <div class="container-fluid">
+                <div  align="right">
+                   <a href="">Account</a>
+                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                   <a href="#">Log out</a>
+                </div>
+              </div>
+	       </nav>
+        
+        
+          <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h5><a href="/employees">Employee List</a></h5>
+                            </div>
+                            <div class="content">
+							 <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>First Name *</label>
+                                                 <input type="text" class="form-control" disabled value="<%= employee.firstname %>"></div>
+                                      </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Last Name</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.lastname %>">
+                                      </div>
+                                   </div>
+                             </div>
+							 <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.address %>">
+                                            </div>
+                                        </div>
+										 <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Office Location</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.officelocation %>">
+                                            </div>
+                                        </div>
+                             </div>
+							 <div class="row">
+										<div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Country</label>
+                                                 <input type="text" class="form-control" disabled value="<%= employee.country %>">
+									   </div>
+                                   </div>
+								   <div class="col-md-4">
+									 <div class="form-group">
+                                           <label>City </label>
+                                                 <input type="text" class="form-control" disabled value="<%= employee.city %>">
+									   </div>
+                                   </div>	
+                                </div>
+							 <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>DOB</label>
+                                                <input type="date" class="form-control" id="dateofbirth" disabled value="<%= employee.dateofbirth %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Passport/IC No *</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.passportno %>">
+                                            </div>
+                                        </div>
+                             </div>	
+							 
+							 <div class="row">
+                                        <div class="col-md-4">
+                                           <div class="form-group">
+                                                <label>Date Of Joining *</label>
+                                                <input type="date" class="form-control" disabled id="dateofjoining"  value="<%= employee.dateofjoining %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Nationality</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.nationality %>">
+                                            </div>
+                                        </div>
+                             </div>	
+
+                             <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Marrital Status</label>
+												<input type="radio" id="ms1"
+												   name="maritalstatus" value="married" onclick="show();">
+												  <label for="ms1">Married</label>
+
+												  <input type="radio" id="ms2"
+												   name="maritalstatus" value="unmarried" onclick="hide();">
+												  <label for="ms2">Unmarried</label>
+                                            </div>
+                                        </div>
+								 
+								 <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>WorkPermit Status</label>
+												<input type="text" class="form-control" disabled value="<%= employee.permitstatus %>">
+                                            </div>
+                                        </div>
+                             </div>
+                             <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Comments</label>
+                                                <textarea rows="5" class="form-control" disabled id="comment" value="<%= employee.comment %>"></textarea>
+                                            </div>
+                                        </div>
+                                 </div>
+							 
+							
+			                 <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Father Name</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.fathername %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Mother Name</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.mothername %>">
+                                            </div>
+                                        </div>
+                             </div>			
+							 <div class="row" id="divs">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Spouse Name</label>
+                                                <input type="text" class="form-control" disabled id="spousename" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>No Of Kids</label>
+                                                <input type="number" class="form-control" disabled id="noofkids">
+                                            </div>
+                                        </div>
+                             </div>	
+								
+								
+								
+						     
+							 
+							   <h3><a id="edit12" href="/employees/edit/<%= employee._id%>" class="btn btn-info btn-fill pull-right">EDIT</a></h3>
+                                <form action="/employees/inactive/<%= employee._id%>" method="post">
+                                <button type="submit" id="btnInActive" class="btn btn-info btn-fill pull-right" onclick="return confirm('Are you sure want to do?')">Inactive</button>
+							   
+						       <div class="clearfix"></div>
+                             </form>
+					  
+                          </div>
+						 </div>
+                       </div>
+					   
+					   <div class="container">
+					     <div class="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
+						 <% if ( employee.photo != null ) { %>
+                            <img src="<%= employee.photo %>" class="img-responsive">
+							<h4 class="title"><%= employee.firstname %><br/>
+						 <% }else { %>
+						 <h4 class="title">Photo Not Uploaded<br/>
+						 <% } %>
+                         </div>
+                       </div>
+					   
+					  
+					 
+                    </div>
+			    </div>
+        </body>
+    </html>
+								
+<script type="text/javascript">
+
+ 
+ $( document ).ready(function() {
+  
+     $('#comment').val('<%= employee.comment %>');
+  
+     var dt1 = '<%= employee.dateofbirth %>';
+	 d1 = new Date(dt1);
+	 $('#dateofbirth').val($.datepicker.formatDate('yy-mm-dd', d1));
+	 
+	 var dt2 = '<%= employee.dateofjoining %>';
+	 d2 = new Date(dt2);
+	 $('#dateofjoining').val($.datepicker.formatDate('yy-mm-dd', d2));
+  
+  
+  if('<%=employee.maritalstatus%>'!=null)
+       {
+	   
+           if('<%=employee.maritalstatus%>'=="married"){
+		   
+              document.getElementById('ms1').checked=true;
+			  document.getElementById('divs').style.display ='block';
+              document.getElementById('spousename').value= '<%=employee.spousename%>' ;
+              document.getElementById('noofkids').value= '<%=employee.noofkids%>' ;
+             }
+          else
+           {
+             document.getElementById('ms2').checked=true;
+			 document.getElementById('divs').style.display = 'none';
+             
+           }
+       }
+	   
+  if('<%=employee.status%>'!= 'Active'){
+ 
+      document.getElementById('btnInActive').innerHTML="Active";
+	  
+	  $('#edit12').addClass('disabled');
+      }
+
+});
+
+
+
+</script>						 
+       
+					   
+                     

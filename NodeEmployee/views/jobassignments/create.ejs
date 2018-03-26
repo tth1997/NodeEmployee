@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
+    <link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+	<link href="/stylesheets/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+	
+	
+	
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-image/image/sidebar-5.jpg>
+		      <div class="sidebar-wrapper">
+		
+                    <div class="logo">
+                        <a target="_blank" href="http://www.safe-lanes.com" class="simple-text">
+                            <img src="/images/SafeLanes_logo.png" class="imgclass" />
+                        </a>
+                    </div>
+                    <ul class="nav">
+                        <li>
+                            <a href="/dashboard">
+                               <p>Dashboard</p>
+                            </a>
+                        </li>
+                        
+					    
+						<li>
+                            <a href="/employees">
+                               <p>Employee Master</p>
+                            </a>
+                        </li>
+						
+                        <li>
+                            <a href="/vdranalysiss">
+                                <p>VDR Job Tracker</p>
+                            </a>
+                        </li>
+                        <li  class="active">
+                            <a href="/jobassignments">
+                               <p>Vessel Job Tracker</p>
+                            </a>
+                        </li>
+						<li>
+                            <a href="/clients">
+                               <p>Client Details</p>
+                            </a>
+                        </li>
+						<li>
+                            <a href="/observationanalysis">
+                               <p>Observation Analysis</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        
+ <div class="main-panel">
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div  align="right">
+                <a href="">Account</a>
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="#">Log out</a>
+            </div>
+        </div>
+	</nav>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+							   
+                                  <h5><a href="/jobassignments">Vessel Job Tracker</a></h5>
+                                  <h5>Create New Vessel Job Tracker</h5>
+						          <div align="right">
+							         <h5><a href="/jobs">Add/Edit Jobs</a></h5>
+								  </div>
+							   
+							</div>
+							<div class="content">
+                               <form id ="createjobassignment" action="/jobassignments/save" enctype="multipart/form-data" method="post">
+							
+							     <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                            <label>Company *</label>
+                                                <select name="company" class="form-control" id="company">
+								                 <% for(var i=0; i < company.length; i++){ %>
+								                 <option value='<%= company[i].client_id %>'><%= company[i].companyname%></li>
+                                                 <% } %>
+                                                 </select>
+									   </div>
+                                   </div>
+								   
+								   
+								   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Vessel *</label>
+                                                  <select name="vessel" class="form-control" id="vessel">
+												  <% for(var i=0; i < vessel.length; i++){ %>
+								                 <option value='<%= vessel[i]._id %>'><%= vessel[i].name %></li>
+                                                 <% } %>
+                                                 </select>
+                                      </div>
+                                   </div>
+								   </div>
+								    <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Job Category</label>
+                                                <select name="jobcategory" class="form-control" id="jobcategory">
+												<% for(var i=0; i < jobcategory.length; i++){ %>
+								                 <option value='<%= jobcategory[i]._id %>'><%= jobcategory[i].jobcategory %></li>
+                                                 <% } %>
+                                                 </select>
+                                      </div>
+                                   </div>
+                                 
+								 
+								  
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                            <label>Job Type</label>
+                                             <select name="jobtype" id="jobtype" class="form-control">
+												</select> 
+									   </div>
+                                   </div>
+								   </div>
+								    <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Auditor</label>
+                                                 <select name="employeename" class="form-control" id="employeename">
+                                                  <% for(var i=0; i < employee.length; i++){ %>
+                                                   <option value='<%= employee[i].employee_id %>'><%= employee[i].firstname %> <%= employee[i].lastname %></li>
+                                                   <% } %>
+                                                   </select>
+                                      </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Travel FromDate</label>
+                                               <input type="date" class="form-control" placeholder="Travel FromDate" name="travelfromdate" id="travelfromdate">
+                                      </div>
+                                   </div>
+								   </div>
+								    <div class="row">
+									<div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Travel ToDate</label>
+                                               <input type="date" class="form-control" placeholder="Travel ToDate" name="traveltodate" id="traveltodate">
+                                      </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Vessel Schedule</label>
+                                                 
+                                          <div class="form-group has-feedback">
+                                              <input type="radio" id="contactChoice1"
+                                               name="contact" value="planned" required>
+                                              <label for="contactChoice1">Planned</label>
+
+                                              <input type="radio" id="contactChoice2"
+                                               name="contact" value="onboard" required>
+                                              <label for="contactChoice2">On Board</label>
+
+                                              <input type="radio" id="contactChoice3"
+                                               name="contact" value="onhold" required>
+                                              <label for="contactChoice3">On Hold</label>
+                                          </div>
+
+									   </div>
+                                   </div>
+								   </div>
+								   							 
+								 <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Destination from</label>
+                                                  <select name="destfrom" class="form-control" id="destfrom">
+								                   <option value=''>Select Country</li>
+								                   <% for(var i=0; i < country.length; i++){ %>
+												        <option value='<%= country[i] %>'><%= country[i] %></li>
+                                                   <% } %>
+							                      </select>
+									   </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Destination To</label>
+                                                <select name="destto" class="form-control" id="destto">
+								                 <option value=''>Select Country</li>
+								                   <% for(var i=0; i < country.length; i++){ %>
+												        <option value='<%= country[i] %>'><%= country[i] %></li>
+                                                   <% } %>
+							                      </select>
+                                      </div>
+                                   </div>
+                                 </div>
+								  <div class="row">
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Nearest Airport Destination from</label>
+                                                  <select name="airdestfrom" class="form-control" id="airdestfrom">
+												   
+								                  
+								                </select>
+									   </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Nearest Airport Destination To</label>
+                                                <select name="airdestto" class="form-control" id="airdestto">
+												
+								               
+								                </select>
+                                      </div>
+                                   </div>
+                                 </div>
+								 <div class="row">
+								    <div class="col-md-4">
+						               <div class="form-group">
+                                           <label>Upload SEQ</label>
+                                           <input type="file" class="form-control-file" name="doc" id="doc"/>
+										</div>
+									</div>
+									<div class="col-md-4">
+						               <div class="form-group">
+                                           <label>Additional Documents</label>
+                                           <input type="file" class="form-control-file" name="files[]" multiple/>
+										</div>
+									</div>
+						        </div>
+								
+								
+								 
+								 <button type="submit" class="btn btn-info btn-fill pull-right">Save</button>
+							    <div class="clearfix"></div>
+                            </div>
+							
+                           </form>
+                            </div>
+                       </div>
+                    </div>
+			    </div>
+         </body>
+</html>
+
+<script type="text/javascript">
+
+
+
+
+
+	$(document).ready(function() {
+	
+	$jobcategory = $('#jobcategory');
+    $jobtype = $('#jobtype');
+	
+	$jobcategory.change(function() {
+    
+    $jobtype.html(''); // Clear existing options in second dropdown
+    var select = document.getElementById("jobtype");
+	var value = document.getElementById("jobcategory").value;
+	
+	<% for(var i=0; i < jobtype.length; i++){ %>
+	     if(value == '<%= jobtype[i].jobcategory_id %>'){
+            var el = document.createElement("option");
+            el.textContent = '<%= jobtype[i].jobtype %>';
+            el.value = '<%= jobtype[i]._id %>';
+            select.appendChild(el);
+	     }
+    <%}%> 
+    }).change();
+	
+    $('#createjobassignment').bootstrapValidator({
+        container: '#messages',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+           
+			
+        }
+    });
+	
+	
+	$destfrom = $('#destfrom');
+    $airdestfrom = $('#airdestfrom');
+	
+	$destfrom.change(function() {
+    
+    $airdestfrom.html(''); // Clear existing options in second dropdown
+    var select = document.getElementById("airdestfrom");
+	var value = document.getElementById("destfrom").value;
+	
+	
+	
+	<% for(var i=0; i < airport.objAirport.length; i++){ %>
+	
+	     if(value == '<%= airport.objAirport[i].country %>' && '<%= airport.objAirport[i].type %>' == "Airports" 
+		 && '<%= airport.objAirport[i].name %>' != ""){
+		 
+            var el = document.createElement("option");
+            el.textContent = '<%= airport.objAirport[i].name %>';
+            el.value = '<%= airport.objAirport[i].name %>';
+            select.appendChild(el);
+	     }
+		 
+		
+    <%}%> 
+    }).change();	
+	
+	
+	$destto = $('#destto');
+    $airdestto = $('#airdestto');
+	
+	$destto.change(function() {
+    
+    $airdestto.html(''); // Clear existing options in second dropdown
+    var select = document.getElementById("airdestto");
+	var value = document.getElementById("destto").value;
+	
+	
+	
+	<% for(var i=0; i < airport.objAirport.length; i++){ %>
+	     if(value == '<%= airport.objAirport[i].country %>' && '<%= airport.objAirport[i].type %>' == "Airports" 
+		 && '<%= airport.objAirport[i].name %>' != ""){
+		 
+            var el = document.createElement("option");
+            el.textContent = '<%= airport.objAirport[i].name %>';
+            el.value = '<%= airport.objAirport[i].name %>';
+            select.appendChild(el);
+	     }
+		
+    <%}%> 
+    }).change();	
+});
+
+
+   
+
+</script> 
