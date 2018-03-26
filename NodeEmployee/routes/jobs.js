@@ -7,7 +7,7 @@ var MongoClient = mongodb.MongoClient;
 
 /*var dburl = "mongodb://pragyanAG:pragyan123@ds059365.mlab.com:59365/shippingtest";*/
 
-var dburl = "mongodb://localhost/shipping";
+var dburl = "mongodb://safe:safe123/localhost/safelanes";
 
 
 /* GET products listing. */
