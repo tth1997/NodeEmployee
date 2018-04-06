@@ -21,7 +21,11 @@ mongoose.Promise = global.Promise;
 
 
 
+<<<<<<< HEAD
 mongoose.connect('mongodb://pragyanAG:pragyan123@ds059365.mlab.com:59365/shippingtest')
+=======
+mongoose.connect('mongodb://safe:safe123@localhost/safelanes')
+>>>>>>> 907a42216cc5923430dac9f9773fd93975664db3
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
