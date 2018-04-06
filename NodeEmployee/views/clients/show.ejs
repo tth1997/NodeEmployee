@@ -129,21 +129,39 @@
 								
 								   <div class="col-md-4">
                                       <div class="form-group">
-                                           <label>Office No </label>
-                                                <input type="text" class="form-control" placeholder="Office No" disabled name="officeno" id="officeno" value="<%= client.officeno %>">
+                                           <label>Postal Code </label>
+
+                                                <input type="text" class="form-control" disabled value="<%=client.postalcode %>">
                                       </div>
                                    </div>
-                                  <div class="col-md-4">
+                                   <div class="col-md-4">
                                       <div class="form-group">
-                                           <label>Website </label>
-                                                <input type="text" class="form-control" placeholder="Website" disabled name="website" id="website" value="<%= client.website %>">
+                                          <label>Website </label>
+                                                <input type="text" class="form-control" disabled value="<%=client.website %>">
                                       </div>
                                    </div>
 										
                                 </div>
 								
+								<div class="row">
 								
+								   <div class="col-md-4">
+                                      <div class="form-group">
+                                           <label>Office No </label>
+                                                <input type="text" class="form-control" placeholder="Office No" disabled name="officeno" id="officeno" value="<%= client.officeno[0] %>">
+                                      </div>
+                                   </div>
+                                  
 										
+                                </div>
+								
+								
+							   <div class="row" >
+								 <div class="col-md-4" id="select-container">
+                                      
+									  </div>
+								
+                                 </div>	
 										
                               
 								
@@ -192,6 +210,20 @@
 	  
 	  $('#edit12').addClass('disabled');
       }
+	  
+ <% for (var j = 1 ; j < client.officeno.length ;j++){ %>
+	var newDiv=document.createElement('div');
+	var element = document.createElement("input");
+	element.setAttribute("type", "text");
+    element.setAttribute("value", "<%= client.officeno[j] %>");
+	element.setAttribute("class", "form-control");
+	element.setAttribute("disabled","disabled");
+	newDiv.appendChild(element);
+	newDiv.classList.add("form-group");
+	var item = document.getElementById('select-container');
+	item.appendChild(newDiv);
+	
+     <%}%>
 });
 					
 </script>

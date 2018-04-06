@@ -278,6 +278,9 @@
 
 	$(document).ready(function() {
 	
+	sortSelect(document.getElementById("company"), 'text', 'asc');
+	sortSelect(document.getElementById("vessel"), 'text', 'asc');
+	
 	
 	
     $('#createvdrjob').bootstrapValidator({
@@ -305,6 +308,26 @@
     });	
 	
 });
+
+var sortSelect = function (select, attr, order) {
+    if(attr === 'text'){
+        if(order === 'asc'){
+            $(select).html($(select).children('option').sort(function (x, y) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            
+        }// end asc
+        if(order === 'desc'){
+            $(select).html($(select).children('option').sort(function (y, x) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            e.preventDefault();
+        }// end desc
+    }
+
+};
 
 function addWorkDays(startDate, days) {
     // Get the day of the week as a number (0 = Sunday, 1 = Monday, .... 6 = Saturday)

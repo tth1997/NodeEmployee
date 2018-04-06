@@ -7,7 +7,10 @@ var ClientSchema = new mongoose.Schema({
   address: String,
   country: String,
   city: String,
-  officeno: String,
+  postalcode: String,
+  officeno: {
+	  type:[String],
+	  usePushEach: true},
   website: String,
   status: String,
   inserted_at: { type: Date, default: Date.now }

@@ -125,8 +125,8 @@
                                     <tr>
                                       <td><%= data[i].jobcategory%></td>
 				                      <td><a class="editlink" href="javascript:void(0)" data-id="<%= data[i]._id%>">Edit</a>
-		                              &nbsp;&nbsp;<a href="/jobs/inactive?id=<%= data[i]._id%>" 
-		                              onclick="return confirm(&quot;You are going to inactive this record. Continue?&quot;)">Inactive</a></td>
+		                              &nbsp;&nbsp;<a id="link12" href="/jobs/inactive?id=<%= data[i]._id%>" 
+		                              onclick="return confirm(&quot;Are you sure. Continue?&quot;)"><%= data[i].status%></a></td>
 		                           </tr>
 		                        <% } %>
 		                      </tbody>
@@ -205,8 +205,8 @@
 									  <td><%= data1[i].jobtype%></td>
 									  <td><%= data1[i].jobdescription%></td>
 				                      <td><a class="editlink1" href="javascript:void(0)" data-id="<%= data1[i]._id%>">Edit</a>
-		                              &nbsp;&nbsp;<a href="/jobs/inactivejob?id=<%= data1[i]._id%>" 
-		                              onclick="return confirm(&quot;You are going to inactive this record. Continue?&quot;)">Inactive</a></td>
+		                              &nbsp;&nbsp;<a id="link21" href="/jobs/inactivejob?id=<%= data1[i]._id%>" 
+		                              onclick="return confirm(&quot;Are you sure. Continue?&quot;)"><%= data1[i].status%></a></td>
 		                           </tr>
 		                        <% } %>
 		                      </tbody>
@@ -227,6 +227,9 @@ $.noConflict();
 jQuery( document ).ready(function( $ ) {
     $('#myTable1').DataTable();
 	 $('#myTable2').DataTable();
+	 
+	
+	 
 });
 // Code that uses other library's $ can follow here.
 </script>

@@ -4,7 +4,9 @@ var ClientContactSchema = new mongoose.Schema({
 	firstname: String,
 	lastname: String,
 	designation: String,
-	email: String,
+	email: {
+	  type:[String],
+	  usePushEach: true},
 	officeno: String,
 	mobileno: String,
 	status: String

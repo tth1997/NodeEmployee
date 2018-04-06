@@ -244,7 +244,7 @@ router.post('/save',upload.any(),function(req, res,next) {
                   }
                   else {
 				   cache.del('myjsonobj');
-				   res.render("../views/vdranalysiss/index", {vdranalysiss: vdranalysiss});
+				   res.redirect("/vdranalysiss");
 	              }
                 });
 				}
@@ -369,7 +369,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
                   }
                   else {
 				   cache.del('myjsonobj');
-		           res.render("../views/vdranalysiss/index", {vdranalysiss: vdranalysiss});
+		           res.redirect("/vdranalysiss");
 	              }
                 });
       });

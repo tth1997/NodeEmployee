@@ -189,8 +189,8 @@ router.post('/save',function(req, res,next) {
                   }
 				   else {
 				   cache.del('myjsonobj');
-				   res.render("../views/observationanalysis/index", {observationanalysis: observationanalysis});
-	              }
+				   res.redirect("/observationanalysis");
+				   }
 				});
 			  }				  
 			});
@@ -232,8 +232,7 @@ router.post('/update/:id', function(req,res,next) {
                   }
                   else {
 				   cache.del('myjsonobj');
-		           res.render("../views/observationanalysis/index", {observationanalysis: observationanalysis});
-	              }
+		           res.redirect("/observationanalysis");}
                 });
       });
     });

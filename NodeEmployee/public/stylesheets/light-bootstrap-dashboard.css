@@ -310,7 +310,7 @@ input:focus {
     height: 60px;
 }
 
-.sidebar .nav {
+.sidebar .nav .nav nav-mobile-menu{
     margin-top: 20px;
     float: none;
 }
@@ -3857,6 +3857,9 @@ fieldset[disabled] .btn-neutral.active {
         line-height: normal;
         margin: 0;
     }
+	.sidebar .nav-mobile-menu {
+    display: none;
+}
 }
 
 @media (max-width: 991px) {
@@ -3872,4 +3875,7 @@ fieldset[disabled] .btn-neutral.active {
         line-height: normal;
         margin: 0;
     }
+	.sidebar .nav-mobile-menu {
+    display: none;
+}
 }

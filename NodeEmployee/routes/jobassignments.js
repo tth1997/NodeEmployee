@@ -214,7 +214,7 @@ router.post('/save',upload.any(),function(req, res,next) {
                   }
 				   else {
 				   cache.del('myjsonobj');
-				   res.render("../views/jobassignments/index", {jobassignments: jobassignments});
+				   res.redirect("/jobassignments");
 	              }
 				});
 			  }				  

@@ -100,3 +100,8 @@ table.dataTable thead th, table.dataTable tfoot th {
     font-weight: 400;
     padding-bottom: 5px;
 }
+
+.nav nav-mobile-menu{
+    display: none;
+}
+    

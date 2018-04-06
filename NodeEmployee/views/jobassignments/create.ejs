@@ -268,6 +268,10 @@
 
 	$(document).ready(function() {
 	
+	 sortSelect(document.getElementById("company"), 'text', 'asc');
+	 sortSelect(document.getElementById("vessel"), 'text', 'asc');
+	 sortSelect(document.getElementById("jobcategory"), 'text', 'asc');
+	
 	$jobcategory = $('#jobcategory');
     $jobtype = $('#jobtype');
 	
@@ -285,6 +289,7 @@
             select.appendChild(el);
 	     }
     <%}%> 
+	sortSelect(document.getElementById("jobtype"), 'text', 'asc');
     }).change();
 	
     $('#createjobassignment').bootstrapValidator({
@@ -325,6 +330,8 @@
 		 
 		
     <%}%> 
+	
+	sortSelect(document.getElementById("airdestfrom"), 'text', 'asc');
     }).change();	
 	
 	
@@ -350,10 +357,29 @@
 	     }
 		
     <%}%> 
+	sortSelect(document.getElementById("airdestto"), 'text', 'asc');
     }).change();	
 });
 
+var sortSelect = function (select, attr, order) {
+    if(attr === 'text'){
+        if(order === 'asc'){
+            $(select).html($(select).children('option').sort(function (x, y) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            
+        }// end asc
+        if(order === 'desc'){
+            $(select).html($(select).children('option').sort(function (y, x) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            e.preventDefault();
+        }// end desc
+    }
 
+};
    
 
 </script> 
