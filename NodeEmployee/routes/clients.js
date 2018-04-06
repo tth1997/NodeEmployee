@@ -10,7 +10,7 @@ var Client = require("../models/Client");
 var fs = require('fs-extra')
 var filessystem = require('fs');
 var ClientContact = require("../models/ClientContact");
-var opn= require('opn');
+
 
 // file upload destination folder
 var storage = multer.diskStorage({
@@ -88,6 +88,21 @@ router.post('/save',upload.any(),function(req, res,next) {
 			 client.website = req.body.website;
 			 client.status = "Active";
 			 
+			 console.log(req.body);
+			 
+             if(req.body.id3 != ""){
+				 console.log("start");
+				 for (var i=1;i<=req.body.id3;i++){
+					  if(req.body['myfieldid' + i]!=""){
+						  console.log(req.body['myfieldid' + i]);
+					    client.officeno.push(req.body['myfieldid' + i]);
+					  }
+					 console.log(client.officeno);
+				 }
+					 
+				 
+             }				 
+			 
 			 var dir = './public/uploads/clientdocuments/'+ client.client_id ;
 			          
 			 filessystem.mkdirSync(dir);
@@ -126,30 +141,7 @@ router.post('/save',upload.any(),function(req, res,next) {
 					    }
 						
 						
-						 if(req.body.id1.length > 0)
-		                  {
-							  var obj1 = JSON.parse(req.body.id1);
-			
-			
-								for (var i = 0;i < obj1.length; i++)
-								{
-									
-									console.log(obj1[i]["Office Number"]);
-									console.log(obj1[i]["Mobile Number"]);
-									
-									var clientcontact = {client_id: client.client_id, firstname: obj1[i]["First Name"],  
-												   lastname: obj1[i]["Last Name"],designation: obj1[i]["Designation"],
-												   email: obj1[i]["Email"],officeno: obj1[i]["Office Number"],
-												   mobileno: obj1[i]["Mobile Number"],status:'Active'};
-												   
-												   mongoose.connection.db.collection("clientcontact").insert(clientcontact, function(err, result){
-													  if(err){
-														console.log("err",err);
-													  }
-													  
-												  });
-								}
-						  }
+						
 						
 					    
 					  console.log("Successfully created a client.");
@@ -159,7 +151,7 @@ router.post('/save',upload.any(),function(req, res,next) {
                              }
                           else {
 							 cache.del('myjsonobj');
-                             res.render("../views/clients/index", {clients: clients});
+                             res.redirect("/clients");
                              }
                       });
                     }
@@ -183,85 +175,25 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
   
   var dir1 = './public/uploads/clientdocuments/'+ data.client_id + '/Proposal&Contract' ;
  
+ 
+	 if(req.body.id3 != ""){
+				console.log(req.body.id3);
+				 for (var i=1;i<=req.body.id3;i++){
+					  if(req.body['myfieldid' + i]!=""){
+						  console.log(req.body['myfieldid' + i]);
+					    data.officeno.push(req.body['myfieldid' + i]);
+					  }
+					 console.log(data.officeno);
+				 }
+					 
+				 
+             }
   
   data.save(function(err, data) {
 	  console.log("i am coming here");
         if (err) {
           return next(err);
         }
-		
-		
-		
-		
-		if(req.body.id1.length > 0)
-		{
-			console.log("req.body.id1.length");
-			 var obj1 = JSON.parse(req.body.id1);
-			 var obj2 = JSON.parse(req.body.id1);
-		
-		     if (obj1!= null){
-				 
-				 
-				 
-				 ClientContact.find({client_id: data.client_id}).exec(function (err, clientcontact) {
-                  if (err) {
-                   console.log("Error:", err);	
-                  }
-                  else{
-					 
-					  if (clientcontact.length > 0 && obj1.length == 0 )
-					  {
-						  ClientContact.remove({client_id: data.client_id}, function(err) {
-										if(err) {
-										  console.log(err);
-										}
-										else {
-										  console.log("child deleted!1c ");
-										  
-										}	
-						  });
-					  }
-				    }
-				  
-                  });
-							  if(obj1.length > 0)
-							   
-							   {
-									 console.log("obj1",data.client_id);
-									
-										ClientContact.remove({client_id: data.client_id}, function(err) {
-										if(err) {
-										  console.log(err);
-										}
-										else {
-										  console.log("child deleted!1c ");
-										  
-										}
-									  
-								                        				  
-								console.log(obj2);
-								console.log("obj2",data.client_id);
-								for (var i = 0;i < obj2.length; i++)
-								{
-									console.log("insert2a child records",obj2.length);
-									console.log("insert2b child records",i);
-									
-									var clientcontact = {client_id: data.client_id, firstname: obj2[i]["First Name"],  
-												   lastname: obj2[i]["Last Name"],designation: obj2[i]["Designation"],
-												   email: obj2[i]["Email"],officeno: obj2[i]["Office Number"],
-												   mobileno: obj2[i]["Mobile Number"],status:'Active'};
-										console.log("child records2c", i, clientcontact);	   
-								    mongoose.connection.db.collection("clientcontact").insert(clientcontact, function(err, result){
-									  if(err){
-										console.log("err2d",err);
-										}
-									  else{console.log("suceess child record insert 2e", i);}
-									});
-								}
-                                });
-							   }
-		     }
-		}
 							   
 			if(req.files.length > 0)
                {
@@ -291,7 +223,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
                   }
                   else {
 				   cache.del('myjsonobj');
-		           res.render("../views/clients/index", {clients: clients});
+		           res.redirect("/clients");
 	              }
                 });
       });
@@ -323,5 +255,169 @@ router.get('/returncity', function(req, res, next) {
    
 });
 
+router.get('/returnclientcontact', function(req, res, next) {
+   var client_id = req.query.client_id;
+   
+   ClientContact.find({status:'Active',client_id:req.query.client_id}).exec(function (err, clientcontact) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   
+   
+   res.send(clientcontact);
+   }); 
+});
+router.get('/inactiveclientcontact/:id', function(req, res, next) {
+  
+  
+  console.log("start");
+  console.log(req.params.id);
+  
+  
+   ClientContact.findById({_id:req.params.id}).exec(function (err, clientcontact) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   clientcontact.status='Inactive';
+   console.log(clientcontact);
+   clientcontact.save(function(err, data) {
+        if (err) {
+          console.log("Error:", err);
+        }
+	 
+        else {
+          console.log("clientcontact Inactive/Active!");
+		  
+		  
+          ClientContact.find({status:'Active',client_id:clientcontact.client_id}).exec(function (err, clientcontact) {
+			 
+                  console.log(clientcontact);
+				  if (err) {
+                   console.log("Error:", err);
+                  }
+                  else {
+		           res.send(clientcontact);
+	              }
+                });
+    }
+  });
+ });
+});
+
+router.get('/fetchclientcontact/:id', function(req, res, next) {
+	
+    ClientContact.findById({_id:req.params.id}).exec(function (err, clientcontact) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   
+   console.log(clientcontact);
+   res.send(clientcontact);
+   }); 
+});
+
+router.post('/editclientcontact/:id',upload.any(), function(req, res, next) {
+  
+  
+ 
+  
+   ClientContact.findById(req.params.id, function(err, data) {
+   
+    data.firstname = req.body.firstname;
+    data.lastname = req.body.lastname;
+    data.designation = req.body.designation;
+    data.mobileno = req.body.mobileno;
+    data.officeno = req.body.officeno;
+	console.log(data.email);
+    data.email = req.body.email;
+  			console.log("number",req.body.id3); 
+			 if(req.body.id3 != ""){
+				 console.log("start");
+				 for (var i=1;i<=req.body.id3;i++){
+					  if(req.body['emailfield' + i]!=""){
+					  data.email.push(req.body['emailfield' + i]);
+					  }
+					 console.log(data.email);
+				 }
+					 
+				 
+			 }		  
+   
+   data.save(function(err, data) {
+        if (err) {
+          console.log("Error:", err);
+        }
+	 
+        else {
+          console.log("clientcontact Inactive/Active!");
+		  
+		  
+          ClientContact.find({status:'Active',client_id:data.client_id}).exec(function (err, clientcontact) {
+			 
+                  console.log(clientcontact);
+				  if (err) {
+                   console.log("Error:", err);
+                  }
+                  else {
+		           res.send(clientcontact);
+	              }
+                });
+    }
+  });
+ });
+});
+
+router.post('/addclientcontact',upload.any(),function(req, res, next){
+	
+	console.log("start");
+	console.log(req.body.id1);
+	
+	
+			 console.log("body",req.body);
+			 var clientcontact = new ClientContact(req.body);
+			 clientcontact.client_id = req.body.id1;
+			 clientcontact.firstname = req.body.firstname;
+			 clientcontact.lastname = req.body.lastname;
+			 clientcontact.designation = req.body.designation;
+			 clientcontact.mobileno = req.body.mobileno;
+			 clientcontact.officeno = req.body.officeno;
+			 clientcontact.email = req.body.email;
+			 clientcontact.status = "Active";
+			 
+			 if(req.body.id3 != ""){
+				 console.log("start");
+				 for (var i=1;i<=req.body.id3;i++){
+					  if(req.body['emailfield' + i]!=""){
+					  clientcontact.email.push(req.body['emailfield' + i]);
+					  }
+					 console.log(clientcontact.email);
+				 }
+					 
+				 
+			 }		
+			 
+				
+			 clientcontact.save(function(err) {
+				  if(err) {
+                      console.log(err);
+                    }
+				 else {
+				  
+		           ClientContact.find({status:'Active',client_id:req.body.id1}).exec(function (err, clientcontact) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+				     console.log(clientcontact);
+   					 res.send(clientcontact);
+					 }); 
+	              }
+                });
+					 
+				   
+			 
+			 
+	       
+	 
+});
 
 module.exports = router;
