@@ -23,14 +23,11 @@ var JobAssignmentSchema = new mongoose.Schema({
   airdestfrom: String,
   airdestto: String,
   status: String,
-<<<<<<< HEAD
   dtdmb: Date,
   dtcomp: Date,
   dtdue: Date,
   dtdeliver: Date,
   remarks: String,
-=======
->>>>>>> 2a3c5f8f8ce0486e21a8ea0ae5848540bc0abdf3
   inserted_at: { type: Date, default: Date.now }
 });
 
