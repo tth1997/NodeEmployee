@@ -10,7 +10,7 @@ var Client = require("../models/Client");
 var fs = require('fs-extra')
 var filessystem = require('fs');
 var ClientContact = require("../models/ClientContact");
-
+var UploadDocument = require("../models/UploadDocument");
 
 // file upload destination folder
 var storage = multer.diskStorage({
@@ -316,6 +316,31 @@ router.get('/fetchclientcontact/:id', function(req, res, next) {
    }); 
 });
 
+/*router.get('/download/:id', function(req, res, next) {
+	
+	
+	 UploadDocument.findById({_id:req.params.id}).exec(function (err, uploaddocuments) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   
+   console.log(uploaddocuments);
+	
+    
+
+	//var path = express.static(path.join(__dirname, 'public'))
+	console.log(__dirname);
+	var a = __dirname.substring(__dirname.lastIndexOf("/") + 1);
+     //var file = __dirname + '' uploaddocuments.filepath;
+   // var fileName = uploaddoc.fileName; 
+	console.log("dr",a);
+	//console.log(uploaddoc.filepath);
+    //res.download(file);
+   
+   });	
+});
+*/
+
 router.post('/editclientcontact/:id',upload.any(), function(req, res, next) {
   
   
@@ -412,12 +437,7 @@ router.post('/addclientcontact',upload.any(),function(req, res, next){
 					 }); 
 	              }
                 });
-					 
-				   
-			 
-			 
-	       
-	 
+	
 });
 
 module.exports = router;

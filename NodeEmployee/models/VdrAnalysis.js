@@ -11,7 +11,6 @@ var VdrAnalysisSchema = new mongoose.Schema({
   company: String,
   vdrtype: String,
   vdrmake: String,
-  vdrmodel: String,
   analysis_id: String,
   analysis: String,
   drcvclient: Date,
@@ -22,6 +21,7 @@ var VdrAnalysisSchema = new mongoose.Schema({
   dtdeliver: Date,
   dtcomp: Date,
   duedate: Date,
+  remarks: String,
   status: String  
 });
 

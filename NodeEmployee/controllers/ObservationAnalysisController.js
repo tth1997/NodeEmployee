@@ -86,12 +86,13 @@ observationAnalysisController.create = function(req, res) {
 };
 
 observationAnalysisController.show = function(req, res) {
+	var nationality = cache.get('objNat');
   ObservationAnalysis.findOne({_id: req.params.id}).exec(function (err, observationanalysis) {
     if (err) {
       console.log("Error:", err);
     }
 	
-	res.render("../views/observationanalysis/show", {observationanalysis: observationanalysis});
+	res.render("../views/observationanalysis/show", {nationality:nationality,observationanalysis: observationanalysis});
     
 	});
  
@@ -118,8 +119,8 @@ observationAnalysisController.complete = function(req, res) {
                    console.log("Error:", err);
                   }
                   else {
-		           res.render("../views/observationAnalysis/index", {observationanalysis: observationanalysis});
-	              }
+				   res.redirect("/observationanalysis");
+		           }
                 });
     }
   });

@@ -9,6 +9,7 @@ var cache = require('memory-cache');
 var bodyParser = require('body-parser');
 var Employee = require("../models/Employee");
 var BankEmp = require("../models/BankEmp");
+var PayslipEmp = require("../models/PayslipEmp");
 var Bank = require("../models/Bank");
 var VisaEmp = require("../models/VisaEmp");
 var DocumentEmp = require("../models/DocumentEmp");
@@ -69,47 +70,55 @@ router.post('/save',upload.any(), function(req, res,next) {
 	   var employee = new Employee({
             firstname: req.body.firstname,
 			lastname:req.body.lastname,
+			dateofbirth:req.body.dateofbirth,
 			address:req.body.address,
-			officelocation:req.body.officelocation,
+			postalcode:req.body.postalcode,
+			nationality:req.body.nationality,
 			country:req.body.country,
 			city:req.body.city,
-			dateofbirth:req.body.dateofbirth,
+			gender:req.body.gender,
+			office:req.body.office,
 			passportno:req.body.passportno,
 			dateofjoining:req.body.dateofjoining,
-			nationality:req.body.nationality,
-			maritalstatus:req.body.maritalstatus,
+			designation:req.body.designation,
 			permitstatus:req.body.permitstatus,
+			workstatus:req.body.workstatus,
+			maritalstatus:req.body.maritalstatus,
 			comment:req.body.comment,
 			fathername:req.body.fathername,
-            mothername:req.body.mothername,
+			mothername:req.body.mothername,
             spousename:req.body.spousename,
-            noofkids:req.body.noofkids
+            noofkids:req.body.noofkids,
+			mcontactno:req.body.mcontactno,
+            econtactno:req.body.econtactno,
+            fidno:req.body.fidno
+                     
 			   
 	});
 	 
-    
+     
 	 
 	 if(employee.dateofbirth != null)
 	 {
-	   employee.dateofbirth = employee.dateofbirth.toLocaleDateString("en-US");
+	  employee.dateofbirth = employee.dateofbirth.toLocaleDateString("en-US");
 	 }
 	 if(employee.dateofjoining != null)
 	 {
 	   employee.dateofjoining = employee.dateofjoining.toLocaleDateString("en-US");
 	 }
 	 
+	
+	 
 	 var employee_id;
        
 	   mongoose.connection.db.collection("counters").findAndModify( { _id: 'employeeid' }, null, { $inc: { sequence_value: 1 } }, function(err, result){
         if(err) console.log("Error:",err);
-	         employee_id = result.value.sequence_value;
+	        
+			employee_id = result.value.sequence_value;
 			
-			 var joindate = new Date(req.body.dateofjoining);
-			  
-             var yyyy = joindate.getFullYear();
-             var year = yyyy.toString().substr(-2);
+			 
  
-       employee.employee_id = 'SL' + year + '00' + employee_id ;
+       employee.employee_id = 'SL' + '00' + employee_id ;
 	   employee.status = "Active";
 	   
 	  
@@ -142,7 +151,7 @@ router.post('/save',upload.any(), function(req, res,next) {
 			   }
 		
 		
-	    
+	    console.log(employee);
 	     employee.save(function(err) {
               if(err) {
                 console.log(err);
@@ -150,10 +159,7 @@ router.post('/save',upload.any(), function(req, res,next) {
                 } else {
                 console.log("Successfully created an employee.");
 				var country = require ('countries-cities').getCountries();
-                Employee.find({}).exec(function (err, employees) {
-                  if (err) {
-                   console.log("Error:", err);	
-                  }
+                
 				Bank.find({}).exec(function (err, bank) {
                   if (err) {
                    console.log("Error:", err);	
@@ -167,7 +173,7 @@ router.post('/save',upload.any(), function(req, res,next) {
 			
  	              }
 				});
-                });
+                
 				});
 				}
 			  
@@ -192,26 +198,31 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
 	
   Employee.findById(req.params.id, function(err, data) {
 
-  
+  console.log("emp",req.body);
   data.firstname = req.body.firstname;
   data.lastname = req.body.lastname;
-  data.address = req.body.address;
-  data.officelocation = req.body.officelocation;
-  data.country = req.body.country,
-  data.city = req.body.city,
   data.dateofbirth = req.body.dateofbirth;
+  data.address = req.body.address;
+  data.postalcode = req.body.postalcode;
+  data.nationality = req.body.nationality;
+  data.country = req.body.country;
+  data.city = req.body.city;
+  data.gender = req.body.gender;
+  data.office = req.body.office;
   data.passportno = req.body.passportno;
   data.dateofjoining = req.body.dateofjoining;
-  data.nationality = req.body.nationality;
-  data.maritalstatus = req.body.maritalstatus;
+  data.designation = req.body.designation;
   data.permitstatus = req.body.permitstatus;
+  data.workstatus = req.body.workstatus;
+  data.maritalstatus = req.body.maritalstatus;
   data.comment=req.body.comment;
   data.fathername = req.body.fathername;
   data.mothername = req.body.mothername;	
   data.spousename = req.body.spousename;
   data.noofkids = req.body.noofkids;
-  
- 
+  data.mcontactno = req.body.mcontactno;
+  data.econtactno = req.body.econtactno;	
+  data.fidno = req.body.fidno;
        
 	    
 	    var dir2 = './public/uploads/employeerecords/'+ data.employee_id + '/profile';
@@ -411,7 +422,7 @@ router.post('/adddocemp',upload.any(),function(req, res, next){
 	
 	if(req.files.length>0){
 		
-		 console.log("start add document");
+		 
 		 
 		var dir = './public/uploads/employeerecords/'+ req.body.id3 ;
 	    
@@ -444,17 +455,41 @@ router.post('/adddocemp',upload.any(),function(req, res, next){
 		 if (!fs.existsSync(dir6))
 		 filessystem.mkdirSync(dir6);
 	 
-		 var dir7 = './public/uploads/employeerecords/'+ req.body.id3 + '/Payslip';
+		 var dir7 = './public/uploads/employeerecords/'+ req.body.id3 + '/IC';
 		 if (!fs.existsSync(dir7))
 		 filessystem.mkdirSync(dir7);
 	 
-	     console.log(req.body.documenttype);
-		
+	    
 	 
 		 var documenttype = getValueByKey(req.body.documenttype,obj.documenttype);
 		 
 		 console.log(documenttype);
-	 
+	     
+		 if(documenttype == "Attachment Of IC"){
+		     
+		      for(var i = 0; i < req.files.length ;i++){
+				  console.log("inside");
+				  console.log(req.files.length);
+					
+					fs.move('./public/uploads/employeerecords/' + req.files[i].filename , dir7 + '/' + req.files[i].filename , function (err) {
+							 if (err) return console.error(err)
+							 console.log("success!")
+							});
+					
+				    var docemp = {employee_id: req.body.id3, documenttype_id: req.body.documenttype,
+                                  documentype: documenttype ,filename: req.files[i].filename,				
+								  filepath: '/uploads/employeerecords/'+ req.body.id3 + '/IC' + '/' + req.files[i].filename,
+								  status:'Active' ,typeofdoc: 'IC'};
+								  
+								  mongoose.connection.db.collection("documentemp").insert(docemp, function(err, result){
+									  if(err){
+										console.log("err",err);
+									  }
+								 
+								});
+			  }
+		 }
+		 
 	     if(documenttype == "Attachment Of Passport"){
 		     
 		      for(var i = 0; i < req.files.length ;i++){
@@ -597,29 +632,7 @@ router.post('/adddocemp',upload.any(),function(req, res, next){
 								});
 			  }
 		 }
-		  if(documenttype == "Payslip"){
-		     
-		      for(var i = 0; i < req.files.length ;i++){
-				  
-					
-					fs.move('./public/uploads/employeerecords/' + req.files[i].filename , dir7 + '/' + req.files[i].filename , function (err) {
-							 if (err) return console.error(err)
-							 console.log("success!")
-							});
-					
-				    var docemp = {employee_id: req.body.id3, documenttype_id: req.body.documenttype,
-                                  documentype: documenttype ,filename: req.files[i].filename,				
-								  filepath: '/uploads/employeerecords/'+ req.body.id3 + '/Payslip' + '/' + req.files[i].filename,
-								  status:'Active' ,typeofdoc: 'Payslip'};
-								  
-								  mongoose.connection.db.collection("documentemp").insert(docemp, function(err, result){
-									  if(err){
-										console.log("err",err);
-									  }
-								  
-								});
-			  }
-		 }
+		  
 		 DocumentEmp.find({status:'Active',employee_id:req.body.id3}).exec(function (err, docemp) {
                   if (err) {
                    console.log("Error:", err);	
@@ -775,6 +788,199 @@ router.get('/inactivebank/:id', function(req, res, next) {
 	              }
                 });
         }
+  });
+ });
+});
+
+router.post('/addpayslipemp',upload.any(),function(req, res, next){
+	
+	console.log("start");
+	console.log(req.body.id7);
+	console.log(req.body);
+	
+	if(req.files.length>0){
+		console.log("start insert1");
+	  var dir1 = './public/uploads/employeerecords/'+ req.body.id7 + '/payslips';
+	    
+	 if (!fs.existsSync(dir1))
+	 filessystem.mkdirSync(dir1);
+	 console.log(dir1);
+	 
+	 fs.move('./public/uploads/employeerecords/' + req.files[0].filename , dir1 + '/' + req.files[0].filename , function (err) {
+							 if (err) return console.error(err)
+							 console.log("success!")
+							});
+							
+	}
+	
+			 var payslipemp = new PayslipEmp(req.body);
+			 payslipemp.employee_id = req.body.id7;
+			 payslipemp.year = req.body.year;
+			 
+			 
+			 if(req.files.length>0){
+			 payslipemp.filename = req.files[0].filename;
+			 var filepath = '/uploads/employeerecords/'+ req.body.id7 + '/payslips' + '/' + req.files[0].filename;
+			 payslipemp.filepath = filepath;
+			
+			 
+			
+			 }
+			 else{
+				 
+			 payslipemp.filename = "";
+			 payslipemp.filepath = "";
+			 }
+			 
+			 
+			
+			 payslipemp.month = req.body.month;
+			 
+			 payslipemp.status = "Active";
+			 
+			 
+			 
+			console.log("payslipemp object",payslipemp);	
+
+                      
+
+			
+			 payslipemp.save(function(err) {
+				  if(err) {
+                      console.log(err);
+                    }
+				 else {
+				   
+		          PayslipEmp.find({status:'Active',employee_id:payslipemp.employee_id}).exec(function (err, payslipemp) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+				     console.log(payslipemp);
+   					 res.send(payslipemp);
+					 }); 
+	              }
+                });
+					 
+				   
+			 
+			 
+	        
+	 
+});
+
+router.get('/returnpayslipemp', function(req, res, next) {
+   var employee_id = req.query.employee_id;
+   var year = req.query.year;
+  
+   
+   if(year == ''){
+   
+   PayslipEmp.find({status:'Active',employee_id:req.query.employee_id}).exec(function (err, payslipemp) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   
+   console.log("a",payslipemp);
+   res.send(payslipemp);
+   });
+}
+else
+{
+	PayslipEmp.find({status:'Active',year:year,employee_id:req.query.employee_id}).exec(function (err, payslipemp) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   
+   console.log("b",payslipemp);
+   res.send(payslipemp);
+   });
+}	
+});
+
+router.get('/inactivepayslip/:id', function(req, res, next) {
+  
+  
+  console.log("start");
+  console.log(req.params.id);
+  
+  
+   PayslipEmp.findById({_id:req.params.id}).exec(function (err, payslipemp) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   payslipemp.status='Inactive';
+   console.log(payslipemp);
+   payslipemp.save(function(err, data) {
+        if (err) {
+          console.log("Error:", err);
+        }
+	 
+        else {
+          console.log("payslipemp Inactive/Active!");
+		  console.log(req.body.id7);
+		  
+          PayslipEmp.find({status:'Active',employee_id:payslipemp.employee_id}).exec(function (err, payslipemp) {
+                  if (err) {
+                   console.log("Error:", err);
+                  }
+                  else {
+		           res.send(payslipemp);
+	              }
+                });
+        }
+  });
+ });
+});
+
+router.get('/fetchbankemp/:id', function(req, res, next) {
+	
+    BankEmp.findById({_id:req.params.id}).exec(function (err, bankemp) {
+                  if (err) {
+                   console.log("Error:", err);	
+                  }
+   
+   console.log(bankemp);
+   res.send(bankemp);
+   }); 
+});
+
+router.post('/editbankemp/:id',upload.any(), function(req, res, next) {
+ 
+  
+ var obj=cache.get('myjsonobj');
+ 
+    
+   BankEmp.findById(req.params.id, function(err, data) {
+    
+    data.bankname_id = req.body.bankname;
+    data.bankname = getValueByKey(req.body.bankname,obj.bank);
+    data.address = req.body.baddress;
+    data.scode = req.body.scode;
+    data.ifsccode = req.body.ifsccode;
+	
+    data.accountno = req.body.accountno;
+  			
+   
+    data.save(function(err, data) {
+        if (err) {
+          console.log("Error:", err);
+        }
+	 
+        else {
+          console.log("BankEmp Inactive/Active!");
+		  
+		  
+          BankEmp.find({status:'Active',employee_id:data.employee_id}).exec(function (err, bankemp) {
+			 
+                  console.log(bankemp);
+				  if (err) {
+                   console.log("Error:", err);
+                  }
+                  else {
+		           res.send(bankemp);
+	              }
+                });
+    }
   });
  });
 });

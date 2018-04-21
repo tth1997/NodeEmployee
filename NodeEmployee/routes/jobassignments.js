@@ -133,6 +133,11 @@ router.post('/save',upload.any(),function(req, res,next) {
             destto: req.body.destto,
 			airdestfrom: req.body.airdestfrom,
 			airdestto: req.body.airdestto,
+			dtdmb: req.body.dtdmb,
+			dtcomp: req.body.dtcomp,
+			dtdue: req.body.dtdue,
+			dtdeliver: req.body.dtdeliver,
+			remarks: req.body.remarks,
             status:'Active'
             });
 			 if(jobassignment.travelfromdate != null)
@@ -144,6 +149,22 @@ router.post('/save',upload.any(),function(req, res,next) {
 			   jobassignment.traveltodate = jobassignment.traveltodate.toLocaleDateString("en-US");
 			 }
 			 
+			 if(jobassignment.dtdmb != null)
+			 {
+			   jobassignment.dtdmb = jobassignment.dtdmb.toLocaleDateString("en-US");
+			 }
+			 if(jobassignment.dtcomp != null)
+			 {
+			   jobassignment.dtcomp = jobassignment.dtcomp.toLocaleDateString("en-US");
+			 }
+			 if(jobassignment.dtdue != null)
+			 {
+			   jobassignment.dtdue = jobassignment.dtdue.toLocaleDateString("en-US");
+			 }
+			 if(jobassignment.dtdeliver != null)
+			 {
+			   jobassignment.dtdeliver = jobassignment.dtdeliver.toLocaleDateString("en-US");
+			 }
 			   var dir = './public/uploads/vesseljobtrackers/'+ jobassignment.job_Assignid ;
 	    
 			   filessystem.mkdirSync(dir);
@@ -237,10 +258,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
   
   
   
-    data.company_id = req.body.company;
-    data.company = getClientByKey(req.body.company, obj.company);
-	data.vessel_id = req.body.vessel;
-    data.vessel = getValueByKey(req.body.vessel, obj.vessel);
+   
 	data.job_catid = req.body.jobcategory;
     data.jobcategory = getJobCategoryByKey(req.body.jobcategory, obj.jobcategory);
     data.job_typeid = req.body.jobtype;
@@ -254,7 +272,12 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
 	data.destto = req.body.destto;
 	data.airdestfrom = req.body.airdestfrom;
 	data.airdestto = req.body.airdestto;
-  
+    data.dtdmb = req.body.dtdmb;
+	data.dtcomp = req.body.dtcomp;
+	data.dtdue = req.body.dtdue;
+	data.dtdeliver = req.body.dtdeliver;
+	data.remarks = req.body.remarks;
+    
     if(data.travelfromdate != null)
 	 {
 	   data.travelfromdate = data.travelfromdate.toLocaleDateString("en-US");
@@ -263,6 +286,23 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
 	 {
 	   data.traveltodate = data.traveltodate.toLocaleDateString("en-US");
 	 }
+	 if(data.dtdmb != null)
+	 {
+	   data.dtdmb = data.dtdmb.toLocaleDateString("en-US");
+	 }
+	 if(data.dtcomp != null)
+	 {
+	   data.dtcomp = data.dtcomp.toLocaleDateString("en-US");
+	 }
+	 if(data.dtdue != null)
+	 {
+	   data.dtdue = data.dtdue.toLocaleDateString("en-US");
+	 }
+	 if(data.dtdeliver != null)
+	 {
+	   data.dtdeliver = data.dtdeliver.toLocaleDateString("en-US");
+	 }
+	console.log("hi",data); 
     data.save(function(err, data) {
         if (err) {
           return next(err);
@@ -313,7 +353,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
                   }
                   else {
 				   cache.del('myjsonobj');
-		           res.render("../views/jobassignments/index", {jobassignments: jobassignments});
+		           res.redirect("/jobassignments");
 	              }
                 });
       });
@@ -324,5 +364,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
 router.post('/complete/:id', function(req, res, next) {
   jobassignment.complete(req, res);
 });
-
+router.post('/cancel/:id', function(req, res, next) {
+  jobassignment.cancel(req, res);
+});
 module.exports = router;

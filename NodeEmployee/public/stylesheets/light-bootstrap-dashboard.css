@@ -3395,7 +3395,8 @@ fieldset[disabled] .btn-neutral.active {
         transform: translate3d(0px, 0, 0);
     }
     .nav-open .navbar .container {
-        left: -250px;
+        left: 0;
+		right: auto;
     }
     .nav-open .main-panel {
         left: 0;
@@ -3413,7 +3414,7 @@ fieldset[disabled] .btn-neutral.active {
         transform: translate3d(0px, 0, 0);
     }
     .nav-open .menu-on-left .main-panel {
-        left: 0;
+        right: 0;
         -webkit-transform: translate3d(260px, 0, 0);
         -moz-transform: translate3d(260px, 0, 0);
         -o-transform: translate3d(260px, 0, 0);
@@ -3421,7 +3422,7 @@ fieldset[disabled] .btn-neutral.active {
         transform: translate3d(260px, 0, 0);
     }
     .menu-on-left .sidebar {
-        left: 0;
+        right: 0;
         right: auto;
         -webkit-transform: translate3d(-260px, 0, 0);
         -moz-transform: translate3d(-260px, 0, 0);
@@ -3430,8 +3431,8 @@ fieldset[disabled] .btn-neutral.active {
         transform: translate3d(-260px, 0, 0);
     }
     .menu-on-left #bodyClick {
-        right: 0;
-        left: auto;
+        right: auto;
+        left: 0;
     }
     .navbar-toggle .icon-bar {
         display: block;

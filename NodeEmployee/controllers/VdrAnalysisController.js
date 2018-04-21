@@ -159,56 +159,52 @@ vdranalysisController.edit = function(req, res) {
 };
 
 
-// Delete a job
 vdranalysisController.complete = function(req, res) {
+	
 	 VdrAnalysis.findById(req.params.id, function(err, data) {	
+	 data.status = 'completed';
 	 
-	  console.log(data);
-	 
-	 var newvalues;
-	 var valStatus = data.status;
-	 var newStatus;
-	 console.log(data.status);
-	 if(valStatus == "Inactive"){
-		 console.log("valStatus1",valStatus);
-	      newStatus = 'Active';
-	      newvalues = {$set: {status: "Active"} };
-	 }
-	 if(valStatus == "Active"){
-		  console.log("avc",valStatus);
-		  newStatus = 'Inactive';
-	      newvalues = {$set: {status: "Inactive"} };
-	 }
-	 data.status=newStatus;	  
 	 console.log(data);
 	 
 	var myquery = { columnmap: data.vdr_id };
-	
+    var newvalues = {$set: {status: "completed"} };
     
-    mongoose.connection.db.collection("uploaddocuments").updateMany(myquery, newvalues, function(err, res) {
-    if (err) throw err;
-    console.log(res.result.nModified + " document(s) updated");
-    
-  });
 	 data.save(function(err, data) {
         if (err) {
           console.log("Error:", err);
         }
 	 
         else {
-          console.log("Vessel job tracker inactivated!");
-          VdrAnalysis.find({}).exec(function (err, vdranalysiss) {
-                  if (err) {
-                   console.log("Error:", err);
-                  }
-                  else {
-		           res.render("../views/vdranalysiss/index", {vdranalysiss: vdranalysiss});
-	              }
-                });
+          console.log("VDR tracker completed!");
+          res.redirect("/vdranalysiss");
     }
   });
   });
 };
+
+vdranalysisController.cancel = function(req, res) {
 	
+	 VdrAnalysis.findById(req.params.id, function(err, data) {	
+	 data.status = 'cancelled';
+	 
+	 
+	 
+	var myquery = { columnmap: data.vdr_id };
+    var newvalues = {$set: {status: "cancelled"} };
+    
+	 data.save(function(err, data) {
+        if (err) {
+          console.log("Error:", err);
+        }
+	 
+        else {
+          console.log("VDR tracker cancelled!");
+          res.send('{status:200}');
+		           
+	           
+    }
+  });
+  });
+};	
   
 module.exports = vdranalysisController;

@@ -7,7 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
-    <link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+   
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,11 +15,16 @@
       <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
-	<link href="/stylesheets/main.css" rel="stylesheet" />
+	
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 	
-	
+	<link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+	 <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"/>
+    <link href="/stylesheets/main.css" rel="stylesheet" />
 </head>
 <body>
     <div class="wrapper">
@@ -71,16 +76,28 @@
             </nav>
         </div>
         
- <div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed">
-        <div class="container-fluid">
-            <div  align="right">
-                <a href="">Account</a>
+<div class="main-panel" data-color="orange" >
+        <nav class="navbar navbar-default navbar-fixed" >
+            <div class="container-fluid">
+	    <!--added new -->
+	    	<div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"></a>
+                </div>
+	   <!--added new -->
+                <div  align="right">
+                   <a href="">Account</a>
                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <a href="#">Log out</a>
+                   <a href="#">Log out</a>
+                </div>
             </div>
-        </div>
-	</nav>
+			
+		</nav>
         
 		<div class="container-fluid">
                 <div class="row">
@@ -110,23 +127,52 @@
 								<div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label>DOB </label>
+                                                <input type="date" class="form-control" placeholder="Date Of Birth" name="dateofbirth" id="dateofbirth" value="<%= employee.dateofbirth %>">
+                                            </div>
+                                      </div>
+                                       
+										 <div class="col-md-4">
+                                             <div class="form-group">
                                                 <label>Address</label>
                                                 <input type="text" class="form-control" placeholder="Home Address" name="address" id="address" value="<%= employee.address %>">
-                                            </div>
-                                        </div>
-										 <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Office Location</label>
-                                                <input type="text" class="form-control" placeholder="Office Location" name="officelocation" id="officelocation" value="<%= employee.officelocation %>">
-                                            </div>
-                                        </div>
-								</div>
+                                      </div>
+                                    </div>
+                                </div>
+								
 								<div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Postal Code </label>
+                                                <input type="text" class="form-control" placeholder="Postal Code" name="postalcode" id="postalcode" value="<%= employee.postalcode %>">
+                                            </div>
+                                        </div>
+										<div class="col-md-4">
+                                          <div class="form-group">
+                                           <label>Nationality </label>
+										       <select name="nationality" class="form-control" id="nationality">
+											   <% if(employee.nationality != ""){ %>
+											     <option selected value='<%= employee.nationality %>'><%= employee.nationality %></option>
+												 <% } %>
+											     <option value=''>Select Nationality</li>
+											    	<% for(var i=0; i < nationality.objNat.length; i++){ %>
+												     <% if(nationality.objNat[i] != employee.nationality){ %>
+								                   <option value='<%= nationality.objNat[i] %>'><%= nationality.objNat[i] %></li>
+                                                   <% }} %>
+								                </select>
+                                      </div>
+                                   </div>
+								</div>
+								
+                               <div class="row">
 										<div class="col-md-4">
                                       <div class="form-group">
                                            <label>Country</label>
                                                   <select name="country" class="form-control" id="country">
+												   <% if(employee.country != ""){ %>
 												  <option selected value='<%= employee.country %>'><%= employee.country %></option>
+												   <% } %>
+												   <option value=''>Select Country</li>
 								                   <% for(var i=0; i < country.length; i++){ %>
 												      <% if(country[i] != employee.country){ %>
 												        <option value='<%= country[i] %>'><%= country[i] %></li>
@@ -143,60 +189,64 @@
 									   </div>
                                    </div>	
                                 </div>
-								
-								
-                               <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>DOB </label>
-                                                <input type="date" class="form-control" placeholder="Date Of Birth" name="dateofbirth" id="dateofbirth" value="<%= employee.dateofbirth%>">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Passport/IC No *</label>
-                                                <input type="text" class="form-control" placeholder="Passport Number" name="passportno" id="passportno" value="<%= employee.passportno%>">
-                                            </div>
-                                        </div>
-									
-                                </div>						
+											
 									
 
                                								   
 								<div class="row">
-                                   <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Date Of Joining *</label>
-                                                <input type="date" class="form-control" placeholder="Date Of Joining" name="dateofjoining" id="dateofjoining" value="<%= employee.dateofjoining%>">
-                                            </div>
-                                        </div>
-                                   <div class="col-md-4">
-                                      <div class="form-group">
-                                           <label>Nationality </label>
-										       <select name="nationality" class="form-control" id="nationality">
-											   <option value=''>Select Nationality</li>
-											   <option selected value='<%= employee.nationality %>'><%= employee.nationality %></option>
-												<% for(var i=0; i < nationality.objNat.length; i++){ %>
-												     <% if(nationality.objNat[i] != employee.nationality){ %>
-								                   <option value='<%= nationality.objNat[i] %>'><%= nationality.objNat[i] %></li>
-                                                   <% }} %>
-								                </select>
-                                      </div>
-                                   </div>
-                                 </div>	   
-          
-			                     <div class="row">
+                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Marrital Status </label>
-												<input type="radio" id="ms1"
-												   name="maritalstatus" value="married" onclick="show();">
-												  <label for="ms1">Married</label>
+                                                <label>Gender</label>
+                                               
+												 <input type="checkbox" id="GC1"
+												   name="gender" value="female" onclick="selectgender(this)" />
+												  <label>Female</label>
 
-												  <input type="radio" id="ms2"
-												   name="maritalstatus" value="unmarried" onclick="hide();">
-												  <label for="ms2">Unmarried</label>
-												  
+												  <input type="checkbox" id="GC2"
+												   name="gender" value="male" onclick="selectgender(this)" />
+												  <label>Male</label>
+                                            </div>
+                                        </div>
+										 <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Office Location</label>
+                                                <select name="office" class="form-control" id="office">
+												 <option selected value='<%= employee.office %>'><%= employee.office %></option>
+												<% for(var i=0; i < office.length; i++){ %>
+												     <% if(office[i].name != employee.office){ %>
+								                   <option value='<%= office[i].name %>'><%= office[i].name %></li>
+                                                   <% }} %>
+								                </select>
+								                
+											</div>
+                                        </div>
+									
+                                </div>			
+          
+			                     <div class="row">
+                                       
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Passport/IC No *</label>
+                                                <input type="text" class="form-control" placeholder="Passport Number" name="passportno" id="passportno" value="<%= employee.passportno %>">
+                                            </div>
+                                        </div>
+										 <div class="col-md-4">
+                                             <div class="form-group">
+                                                <label>Date Of Joining</label>
+                                                <input type="date" class="form-control" placeholder="Date Of Joining" name="dateofjoining" id="dateofjoining" value="<%= employee.dateofjoining %>">
+                                            </div>
+                                        </div>
+									
+                                </div>		
+										
+								
+								 <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Designation </label>
+												<input type="text" class="form-control" placeholder="Designation" name="designation" id="designation" value="<%= employee.designation %>">
                                             </div>
                                         </div>
 										<div class="col-md-4">
@@ -206,16 +256,42 @@
                                             </div>
                                         </div>
 								 </div>
+								 
+								  <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Marital Status </label>
+												 <div><input type="checkbox" id="MS1"
+												   name="maritalstatus" value="Married" onclick="selectmaritalstatus(this)" />
+												  <label>Married</label>
+												  <input type="checkbox" id="MS2"
+												   name="maritalstatus" value="Unmarried" onclick="selectmaritalstatus(this)" />
+												  <label>Unmarried</label>
+												  <input type="checkbox" id="MS3"
+												   name="maritalstatus" value="Divorced" onclick="selectmaritalstatus(this)" />
+												  <label>Divorced</label>
+												  <input type="checkbox" id="MS4"
+												   name="maritalstatus" value="Separated" onclick="selectmaritalstatus(this)" />
+												  <label>Separated</label>
+												  <input type="checkbox" id="MS5"
+												   name="maritalstatus" value="Widow" onclick="selectmaritalstatus(this)" />
+												  <label>Widow</label>
+												  <input type="checkbox" id="MS6"
+												   name="maritalstatus" value="Registerd Partnership" onclick="selectmaritalstatus(this)" />
+												  <label>Registerd Partnership</label></div>                                            </div>
+                                        </div>
 										
-								
-								<div class="row">
+								 </div>
+								 <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Comments</label>
-                                                <textarea rows="5" class="form-control" placeholder="Here can be your description" name="comment" id="comment" value="<%= employee.comment %>"></textarea>
+                                                <textarea rows="5" class="form-control" placeholder="Here can be your description" name="comment" id="comment"></textarea>
                                             </div>
                                         </div>
                                  </div>
+								 
+								 
 	                            <div class="row" >
 								    <div class="col-md-4">
 						               <div class="form-group">
@@ -229,32 +305,85 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Father Name </label>
-                                                <input type="text" class="form-control" placeholder="Father Name" name="fathername" value="<%= employee.fathername %>">
+                                                <input type="text" class="form-control" placeholder="Father Name" name="fathername" id="fathername" value="<%= employee.fathername %>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Mother Name </label>
-                                                <input type="text" class="form-control" placeholder="Mother Name" name="mothername" value="<%= employee.mothername %>">
-                                            </div>
+                                                <input type="text" class="form-control" placeholder="Mother Name" name="mothername" id="mothername" value="<%= employee.mothername %>">
                                             </div>
                                         </div>
-                                			
-			                     <div class="row" id="dtls">
+                                </div>			
+			                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Spouse Name </label>
-                                                <input type="text" class="form-control" placeholder="Spouse Name" id="spousename" name="spousename" value="<%= employee.spousename %>">
+                                                <input type="text" class="form-control" placeholder="Spouse Name" name="spousename" id="spousename" value="<%= employee.spousename %>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>No Of Kids </label>
-                                                <input type="number" class="form-control" placeholder="Number of kids" id="noofkids" name="noofkids" value="<%= employee.noofkids %>">
+                                                <input type="number" class="form-control" placeholder="Number of kids" name="noofkids" id="noofkids" value="<%= employee.noofkids %>">
                                             </div>
                                         </div>
+										
+										
+                                </div>	
+								 <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Main Contact No </label>
+                                                <input type="text" class="form-control" placeholder="Main Contact number" name="mcontactno" id="mcontactno" value="<%= employee.mcontactno %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Emergency Contact No </label>
+                                                <input type="text" class="form-control" placeholder="Emergency Contact number" name="econtactno" id="econtactno" value="<%= employee.econtactno %>">
+                                            </div>
+                                        </div>
+										
+										
                                 </div>	
 								
+								 <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Have you previously worked for Safe Lanes </label>
+												 <div><input type="checkbox" id="WS1"
+												   name="workstatus" value="Yes" onclick="selectworkstatus(this)" />
+												  <label>Yes</label>
+												  <input type="checkbox" id="WS2"
+												   name="workstatus" value="Job Title" onclick="selectworkstatus(this)" />
+												  <label>Job Title</label>
+												  <input type="checkbox" id="WS3"
+												   name="workstatus" value="Employee" onclick="selectworkstatus(this)" />
+												  <label>Employee</label>
+												  <input type="checkbox" id="WS4"
+												   name="workstatus" value="Fixed Term Employee" onclick="selectworkstatus(this)" />
+												  <label>Fixed Term Employee</label>
+												  <input type="checkbox" id="WS5"
+												   name="workstatus" value="Contractor/Temp" onclick="selectworkstatus(this)" />
+												  <label>Contractor/Temp</label>
+												  <input type="checkbox" id="WS6"
+												   name="workstatus" value="No" onclick="selectworkstatus(this)" />
+												  <label>No</label></div>                                            </div>
+                                        </div>
+										
+								 </div>
+								  <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Can you provide your former ID Number </label>
+                                                <input type="text" class="form-control" placeholder="former ID Number" name="fidno" id="fidno" value="<%= employee.fidno %>">
+                                            </div>
+                                        </div>
+                                       
+										
+										
+                                </div>	
 								
 								
 								
@@ -271,7 +400,7 @@
 					     <div class="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
 						 <% if ( employee.photo != null ) { %>
                             <img src="<%= employee.photo %>" class="img-responsive">
-							<h4 class="title"><%= employee.firstname %><br/>
+							<h4 class="title"><%= employee.firstname %> <%= employee.lastname %><br/>
 						 <% }else { %>
 						 <h4 class="title">Photo Not Uploaded<br/>
 						 <% } %>
@@ -314,18 +443,87 @@
       return false;
    }
   
-    function show(){
-        document.getElementById('dtls').style.display ='block';
+    function selectworkstatus(id){
+	  var chkworkstatus = document.getElementsByName("workstatus");
+	  Array.prototype.forEach.call(chkworkstatus,function(el){
+		el.checked = false;
+	  });
+	  id.checked = true;
     }
-    function hide(){
-        document.getElementById('dtls').style.display = 'none';
+	 function selectgender(id){
+	  var chkgender = document.getElementsByName("gender");
+	  Array.prototype.forEach.call(chkgender,function(el){
+		el.checked = false;
+	  });
+	  id.checked = true;
     }
+	 function selectmaritalstatus(id){
+	  var chkmaritalstatus = document.getElementsByName("maritalstatus");
+	  Array.prototype.forEach.call(chkmaritalstatus,function(el){
+		el.checked = false;
+	  });
+	  id.checked = true;
+    }  
   
   
+    var uploadField = document.getElementById("photo");
+
+    uploadField.onchange = function() {
+		if(this.files[0].size > 2097152){
+		   alert("File is too big!");
+		   this.value = "";
+		};
+    };
 	
-	$(document).ready(function() { 
+	jQuery( document ).ready(function( $ ) {
 	
 	
+	if('<%=employee.maritalstatus%>'!=null)
+       {
+	   
+           if('<%=employee.maritalstatus%>'=="Married")		   
+              document.getElementById('MS1').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Unmarried")	
+             document.getElementById('MS2').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Divorced")	
+		      document.getElementById('MS3').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Separated")	
+             document.getElementById('MS4').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Widow")	
+		      document.getElementById('MS5').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Registerd Partnership")	
+		      document.getElementById('MS6').checked=true;
+		}
+     
+
+  if('<%=employee.gender%>'!=null)
+       {
+	   
+           if('<%=employee.gender%>'=="Female")		   
+              document.getElementById('GC1').checked=true;
+		   else if('<%=employee.gender%>'=="Male")
+             document.getElementById('GC2').checked=true;
+		}	 
+	
+  if('<%=employee.workstatus%>'!=null)
+       {
+	       if('<%=employee.workstatus%>'=="Yes")		   
+              document.getElementById('WS1').checked=true;
+		   else if('<%=employee.workstatus%>'=="Job Title")	
+             document.getElementById('WS2').checked=true;
+		   else if('<%=employee.workstatus%>'=="Employee")	
+		      document.getElementById('WS3').checked=true;
+		   else if('<%=employee.workstatus%>'=="Fixed Term Employee")	
+             document.getElementById('WS4').checked=true;
+		   else if('<%=employee.workstatus%>'=="Contractor/Temp")	
+		      document.getElementById('WS5').checked=true;
+		   else if('<%=employee.workstatus%>'=="No")	
+		      document.getElementById('WS6').checked=true;
+		}
+	
+	
+	
+	$('#comment').val('<%= employee.comment %>');
 	$country = $('#country');
     $city = $('#city');
 	
@@ -354,12 +552,12 @@
             
 			
 			
-			if(country_name == '<%= employee.country %>')
+			
+			sortSelect(document.getElementById("city"), 'text', 'asc');
+            if(country_name == '<%= employee.country %>')
 			{
 			$('#city').val('<%= employee.city %>').attr("selected", "selected");
 		    }
-			sortSelect(document.getElementById("city"), 'text', 'asc');
-           
       });
 	 }
 	 
@@ -382,22 +580,7 @@
 	
 	
 		
-	   if('<%=employee.maritalstatus%>'!=null)
-       {
-	   
-           if('<%=employee.maritalstatus%>'=="married"){
-              document.getElementById('ms1').checked=true;
-			  document.getElementById('dtls').style.display ='block';
-              document.getElementById('spousename').value= '<%=employee.spousename%>' ;
-              document.getElementById('noofkids').value= '<%=employee.noofkids%>' ;
-             }
-          else
-           {
-             document.getElementById('ms2').checked=true;
-			 document.getElementById('dtls').style.display = 'none';
-             
-           }
-       }
+	  
 	   
 	     var dt1 = '<%= employee.dateofbirth %>';
 		 d1 = new Date(dt1);
@@ -418,7 +601,22 @@
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-           
+            firstname: {
+                validators: {
+                    notEmpty: {
+                        message: ''
+                    }
+                }
+            },
+            
+			
+            passportno: {
+                validators: {
+                    notEmpty: {
+                        message: ''
+                    }
+                }
+            }
             
         }
     
@@ -446,6 +644,11 @@ var sortSelect = function (select, attr, order) {
 
 };
 </script>						 
-       
+<script src="/javascripts/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="/javascripts/chartist.min.js"></script>
+<script src="/javascripts/bootstrap-notify.js"></script>
+<script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
+<script src="/javascripts/light-bootstrap-dashboard.js?v=1.4.0"></script>      
 					   
                      

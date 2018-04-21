@@ -115,7 +115,7 @@ router.post('/save',upload.any(),function(req, res,next) {
             company: getClientByKey(req.body.company, obj.company),
 			vdrtype: req.body.contact,
             vdrmake: req.body.vdrmake,
-			vdrmodel: req.body.vdrmodel,
+			
 			analysis_id: req.body.analysis,
 			analysis: getValueByKey(req.body.analysis,obj.analysis),
 			drcvclient: req.body.drcvclient,
@@ -126,6 +126,7 @@ router.post('/save',upload.any(),function(req, res,next) {
 			dtdeliver: req.body.dtdeliver,
 			dtcomp: req.body.dtcomp,
 			duedate: req.body.duedate,
+			remarks: req.body.remarks,
             status:'Active'
             
             });
@@ -268,7 +269,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
             data.auditorname= getEmpByKey(req.body.employeename, obj.employee);
 			data.vdrtype = req.body.contact;
 			data.vdrmake = req.body.vdrmake;
-			data.vdrmodel = req.body.vdrmodel,
+			
 			data.analysis_id = req.body.analysis;
 			data.analysis = getValueByKey(req.body.analysis, obj.analysis);
             data.drcvclient = req.body.drcvclient;
@@ -279,6 +280,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
 			data.dtdeliver = req.body.dtdeliver;
 			data.dtcomp = req.body.dtcomp;
 			data.duedate = req.body.duedate;
+			data.remarks = req.body.remarks;
   
     if(data.drcvclient != null)
 	 {
@@ -380,5 +382,7 @@ router.post('/update/:id',upload.any(), function(req,res,next) {
 router.post('/complete/:id', function(req, res, next) {
   vdranalysis.complete(req, res);
 });
-
+router.post('/cancel/:id', function(req, res, next) {
+  vdranalysis.cancel(req, res);
+});
 module.exports = router;

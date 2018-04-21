@@ -104,4 +104,8 @@ table.dataTable thead th, table.dataTable tfoot th {
 .nav nav-mobile-menu{
     display: none;
 }
-    
+marquee {  
+font-size: 20px;  
+color: #3647FB;  
+} 
+

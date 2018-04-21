@@ -5,6 +5,7 @@ var Nationality = require("../models/Nationality");
 var DocumentType = require("../models/DocumentType");
 var Bank = require("../models/Bank");
 var BankEmp = require("../models/BankEmp");
+var Office = require("../models/Office");
 
 var employeeController = {};
 
@@ -15,6 +16,10 @@ var obj = {};
 
 employeeController.list = function(req, res) {
   var country = require ('countries-cities').getCountries();
+  
+   mongoose.connection.db.collection("year").find({'name':{'$ne':'All'}}).toArray(function(err, year){
+     if(err) console.log("Error:",err);
+  
   Employee.find({}).exec(function (err, employees) {
     if (err) {
       console.log("Error:", err);
@@ -31,13 +36,16 @@ employeeController.list = function(req, res) {
 		if(err){
 				console.log("Error:",err);
 			}
+	
     else {
 	  obj['documenttype'] = documenttype;
 	  obj['bankemp'] = bankemp;
 	  obj['bank'] = bank;
+	  
 	  cache.put('myjsonobj', obj);
-	  res.render("../views/employees/index", {employees: employees,country:country,documenttype:documenttype,bankemp:bankemp,bank:bank});
+	  res.render("../views/employees/index", {employees: employees,country:country,documenttype:documenttype,bankemp:bankemp,bank:bank,year:year});
 	}
+	});
 	});
 	});
   });
@@ -63,7 +71,10 @@ employeeController.create = function(req, res) {
 	
 	var country = require ('countries-cities').getCountries();
 	
-	
+	Office.find({}).exec(function(err, office){
+		if(err){
+				console.log("Error:",err);
+			}
 	Bank.find({}).exec(function(err,bank){
 	        if(err){
 				console.log("Error:",err);
@@ -76,7 +87,7 @@ employeeController.create = function(req, res) {
 			
 			obj['bank'] = bank;
 			obj['documenttype'] = documenttype;
-			
+			obj['office'] = office;
 			cache.put('myjsonobj', obj);
 			
 			var objCountry = cache.get('objCAC');
@@ -84,10 +95,10 @@ employeeController.create = function(req, res) {
 			var nationality = cache.get('objNat');
 			
 						
-            res.render("../views/employees/create",{country:country,nationality:nationality,bank:bank,documenttype:documenttype});
+            res.render("../views/employees/create",{country:country,nationality:nationality,bank:bank,documenttype:documenttype,office:office});
 	
 	});
-	
+	});
 	});
 };
 
@@ -101,12 +112,12 @@ employeeController.edit = function(req, res) {
 	        
 	var nationality = cache.get('objNat');
 	
-	Bank.find({}).exec(function(err,bank){
-	        if(err){
+	Office.find({}).exec(function(err, office){
+		if(err){
 				console.log("Error:",err);
 			}
-			
-			obj['bank'] = bank;
+	
+	
 			
 			cache.put('myjsonobj', obj);
 	
@@ -116,7 +127,7 @@ employeeController.edit = function(req, res) {
       console.log("Error:", err);
     }
     else {
-      res.render("../views/employees/edit", {employee: employee,country:country,nationality:nationality,bank:bank});
+      res.render("../views/employees/edit", {employee: employee,country:country,nationality:nationality,office:office});
     }
     });
     });

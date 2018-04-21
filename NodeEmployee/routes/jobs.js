@@ -5,7 +5,7 @@ var router      = express.Router();
 var mongodb     = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
-/*var dburl = "mongodb://pragyanAG:pragyan123@ds059365.mlab.com:59365/shippingtest";*/
+/*var dburl = "mongodb://localhost/shipping";*/
 
 var dburl = "mongodb://safe:safe123@localhost/safelanes";
 
@@ -49,7 +49,7 @@ router.post('/add', function(req, res, next) {
       db.collection('jobcategorys').find({}).toArray(function(err, docs){
 		  db.collection('jobtypes').find({}).toArray(function(err, docs1){
       if(err) throw err;
-      res.render("../views/jobs", {data: docs,data1: docs1});
+      res.redirect("/jobs");
       db.close();
     });
 	  });
@@ -66,7 +66,7 @@ router.post('/edit', function(req, res, next) {
     db.collection('jobcategorys').find({}).toArray(function(err, docs){
          db.collection('jobtypes').find({}).toArray(function(err, docs1){
            if(err) throw err;
-            res.render("../views/jobs/index", {data: docs,data1: docs1});
+            res.redirect("/jobs");
             db.close();
 		});
          });
@@ -106,7 +106,7 @@ router.get('/inactive', function(req, res, next) {
 	   db.collection('jobcategorys').find({}).toArray(function(err, docs){
 			  db.collection('jobtypes').find({}).toArray(function(err, docs1){
           if(err) throw err;
-          res.render("../views/jobs", {data: docs,data1: docs1});
+          res.redirect("/jobs");
           db.close();
               });
 		  });
@@ -141,7 +141,7 @@ router.post('/addjob', function(req, res, next) {
      db.collection('jobcategorys').find({}).toArray(function(err, docs){ 
       db.collection('jobtypes').find({}).toArray(function(err, docs1){
       if(err) throw err;
-      res.render("../views/jobs", {data1: docs1,data: docs});
+      res.redirect("/jobs");
       db.close();
        });
 	   });
@@ -182,7 +182,7 @@ router.post('/editjob', function(req, res, next) {
 	db.collection('jobcategorys').find({}).toArray(function(err, docs){
          db.collection('jobtypes').find({}).toArray(function(err, docs1){
            if(err) throw err;
-            res.render("../views/jobs/index", {data: docs,data1: docs1});
+            res.redirect("/jobs");
             db.close();
 		});
          });
@@ -224,7 +224,7 @@ router.get('/inactivejob', function(req, res, next) {
           db.collection('jobcategorys').find({}).toArray(function(err, docs){
 			  db.collection('jobtypes').find({}).toArray(function(err, docs1){
           if(err) throw err;
-          res.render("../views/jobs", {data: docs,data1: docs1});
+          res.redirect("/jobs");
           db.close();
               });
 		  });

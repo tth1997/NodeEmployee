@@ -7,7 +7,7 @@ var Employee = require("../models/Employee");
 var Company=require("../models/Client");
 var Country=require("../models/Country");
 var Doc=require("../models/Doc");
-
+var moment = require('moment-business-days');
 var cache = require('memory-cache');
 
 
@@ -23,6 +23,7 @@ var jobAssignmentController = {};
 // Show list of jobAssignments
 jobAssignmentController.list = function(req, res) {
   JobAssignment.find({}).exec(function (err, jobassignments) {
+  
 	  console.log(jobassignments);
     if (err) {
       console.log("Error:", err);
@@ -195,17 +196,34 @@ jobAssignmentController.complete = function(req, res) {
 	 
         else {
           console.log("Vessel job tracker completed!");
-          JobAssignment.find({}).exec(function (err, jobassignments) {
-                  if (err) {
-                   console.log("Error:", err);
-                  }
-                  else {
-		           res.render("../views/jobassignments/index", {jobassignments: jobassignments});
-	              }
-                });
+          res.redirect("/jobassignments");
     }
   });
   });
 };
 
+jobAssignmentController.cancel = function(req, res) {
+	
+	 JobAssignment.findById(req.params.id, function(err, data) {	
+	 data.vesselschedule = 'cancelled';
+	 
+	 
+	 
+	var myquery = { columnmap: data.job_Assignid };
+    var newvalues = {$set: {vesselschedule: "cancelled"} };
+    
+	 data.save(function(err, data) {
+        if (err) {
+          console.log("Error:", err);
+        }
+	 
+        else {
+          console.log("Vessel job tracker cancelled!");
+          res.send('{status:200}');
+		           
+	           
+    }
+  });
+  });
+};
 module.exports = jobAssignmentController;

@@ -7,12 +7,7 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 	
-	<script src="/javascripts/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="/javascripts/chartist.min.js"></script>
-<script src="/javascripts/bootstrap-notify.js"></script>
-<script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
-<script src="/javascripts/light-bootstrap-dashboard.js?v=1.4.0"></script>
+	
     <script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" type="text/javascript"></script>
@@ -28,9 +23,11 @@
 	 <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
+	
+	
     <link href="/stylesheets/animate.min.css" rel="stylesheet"/>
     <link href="/stylesheets/main.css" rel="stylesheet" />
-    <!--  Light Bootstrap Table core CSS    -->
+    
 	
 	
 </head>
@@ -83,13 +80,8 @@
             </nav>
         </div>
 
-<<<<<<< HEAD
   <div class="main-panel" data-color="orange" >
         <nav class="navbar navbar-default navbar-fixed" >
-=======
-  <div class="main-panel">
-    <nav class="navbar navbar-default navbar-fixed" >
->>>>>>> 907a42216cc5923430dac9f9773fd93975664db3
             <div class="container-fluid">
 	    <!--added new -->
 	    	<div class="navbar-header">
@@ -99,11 +91,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-<<<<<<< HEAD
                     <a class="navbar-brand" href="#"></a>
-=======
-                    <a class="navbar-brand" href="#">Dashboard</a>
->>>>>>> 907a42216cc5923430dac9f9773fd93975664db3
                 </div>
 	   <!--added new -->
                 <div  align="right">
@@ -111,7 +99,9 @@
                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                    <a href="#">Log out</a>
                 </div>
+			   
             </div>
+			
 		</nav>
 			
 		
@@ -131,11 +121,10 @@
 									<tr>
 									<th>Add Information</th>
 									<th>EmployeeCode</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>Employee Name</th>
                                     <th>Passport/IC No</th>
                                     <th>Nationality</th>
-                                    <th>Permit Status</th>
+                                    <th>Work Permit</th>
                                     <th>Office</th>
 									<th>Status</th>
 									</tr>
@@ -147,13 +136,13 @@
 								     <td> <a data-toggle="modal" href="#myModal" class="pull-left"><img src='/images/Visa.png' title="Add Visa" align="left" hspace="10" onclick="callVisaemp('<%= employees[i].employee_id%>');"/></a>
 									      <a data-toggle="modal" href="#bankModal" class="pull-left"><img src='/images/bank.png' title="Add Bank" align="left" hspace="10" onclick="callBankemp('<%= employees[i].employee_id%>');"/></a>
 										 <a data-toggle="modal" href="#docModal" class="pull-left"><img src='/images/adddocs.png' title="Add Documents" align="left" hspace="10" onclick="callDocemp('<%= employees[i].employee_id%>');"/></a>
-                                     <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].employee_id%></a></td>
-									 <td><%= employees[i].firstname%></td>
-                                    <td><%= employees[i].lastname%></td>
-								    <td><%= employees[i].passportno%></td>
+										 <a data-toggle="modal" href="#payslipModal" class="pull-left"><img src='/images/Payslip.png' title="Add Payslips" align="left" hspace="10" onclick="callPayslipemp('<%= employees[i].employee_id%>');"/></a>
+                                    <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].employee_id%></a></td>
+									<td><%= employees[i].firstname%> <%= employees[i].lastname%> </td>
+                                    <td><%= employees[i].passportno%></td>
 								    <td><%= employees[i].nationality%></td>
 								    <td><%= employees[i].permitstatus%></td>
-								    <td><%= employees[i].officelocation%></td>
+								    <td><%= employees[i].office%></td>
 									<td><%= employees[i].status%></td>
                                   </tr>
                                 <% } %>
@@ -224,9 +213,13 @@
 									</div>
 						        </div>
 								<font color='red'> <DIV id="une"> </DIV> </font>
-								<input id="subbtn1" type="button" class="btn btn-info btn-fill pull-left" value ="Add Visa"/>
+								 <div class="row" >
+								  <div class="col-md-2">
+								  	 <input id="subbtn1" type="button" class="btn btn-info btn-fill pull-left" value ="Add Visa"/>					             
+								  </div>
 								 
-    							 <div class="clearfix"></div>
+								 </div>
+								 <div class="clearfix"></div>
                                      
 		                          
 		                        </div>
@@ -260,11 +253,9 @@
 				</form>
               </div>
                      
-                    </div>
+        </div>
 
-                   
-
-
+   
     </div>
 </div>
 
@@ -309,7 +300,12 @@
                                    
                                  </div>
 								 <font color='red'> <DIV id="une1"> </DIV> </font>
-								 <input id="subbtn2" type="button" class="btn btn-info btn-fill pull-left" value ="Add Docs"/>					             
+								  <div class="row" >
+								  <div class="col-md-2">
+								  	 <input id="subbtn3" type="button" class="btn btn-info btn-fill pull-left" value ="Add Docs"/>					             
+								  </div>
+								 
+								 </div>
 								 <div class="clearfix"></div>
                                      
 		                          
@@ -344,6 +340,115 @@
                     </div>
     </div>
 </div>
+
+<div class="modal fade" id="payslipModal" tabindex="-1" role="dialog" aria-labelledby="payslipModalLabel">
+                     <div class="modal-dialog" role="document">
+                     <div class="modal-content" >
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="payslipModalLabel">PaySlip Upload</h4>
+                     </div>
+                      <div class="modal-body" style="height: 700px;overflow-y: auto;">
+					  <form id ="payslipEmp" enctype="multipart/form-data" method="post" >
+					  <input id="id7" type="hidden" name="id7" value=""/>
+					  <input id="id8" type="hidden" name="id8" value=""/>
+                     <div class="row">
+                     <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="container">
+                                <div class="content">
+                                   
+								   
+			                          <div class="row">
+                                       <div class="col-md-2">
+                                         <div class="form-group">
+                                           <label>Type of Documents *</label>
+                                                 <select name="year" class="form-control" id="year">
+						                             <option value=''>Select</option>
+													 <% for(var i=0; i < year.length; i++){ %>
+														<option value='<%= year[i].name %>'><%= year[i].name %></li>
+													 <% } %>
+								        
+												 </select>
+									   </div>
+                                   </div>
+								   
+								   <div class="col-md-2">
+										<div class="form-group">
+										  <label>Select Month</label>
+											 <select name="month" class="form-control" id="month">
+											   <option value=''>Select</option>
+											   <option value="January">January</option>
+											   <option value="February">February</option>
+											   <option value="March">March</option>
+											   <option value="April">April</option>
+											   <option value="May">May</option>
+											   <option value="June">June</option>
+											   <option value="July">July</option>
+											   <option value="August">August</option>
+											   <option value="September">September</option>
+											   <option value="October">October</option>
+											   <option value="November">November</option>
+											   <option value="December">December</option>
+											 </select>
+										</div>
+								   </div>
+								   </div>
+								   <div class="row">
+								   
+								   <div class="col-md-2">
+						               <div class="form-group">
+                                           <label>Copy of PaySlips</label>
+                                           <input type="file" class="form-control-file" name="files[]" id ="pdoc" multiple/>
+										   
+										   
+                                       </div>
+									</div>
+                                   
+                                 </div>
+								 <font color='red'> <DIV id="une4"> </DIV> </font>
+								 <div class="row" >
+								  <div class="col-md-2">
+								  	 <input id="subbtn5" type="button" class="btn btn-info btn-fill pull-left" value ="Add PaySlips"/>					             
+								  </div>
+								 
+								 </div>
+								 <div class="clearfix"></div>
+		                          
+		                        </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+						 <div class="content table-responsive table-full-width">
+                            
+                            <table class="table table-hover table-striped" id="tab4">
+                                    <thead>
+									<tr>
+                                    <th>Year</th>
+									<th>Month</th>
+									<th>Payslips</th>
+									<th>Action</th>
+                                    </tr>
+                                </thead>
+                              
+							</table>
+                               
+                        </div>							   
+		               </div>
+			        </div>
+		        </div>
+				</div>
+                    </form> 
+                    </div>
+    </div>
+</div>
+
 <div class="modal fade" id="bankModal" tabindex="-1" role="dialog" aria-labelledby="bankModalLabel">
                      <div class="modal-dialog" role="document">
                      <div class="modal-content" >
@@ -355,6 +460,7 @@
 					  <form id ="bankemp" method="post" >
 					  <input id="id5" type="hidden" name="id5" value=""/>
 					  <input id="id6" type="hidden" name="id6" value=""/>
+					  <input id="idhd1" type="hidden" name="idhd1" value=""/>
                      <div class="row">
                      <div class="col-md-12">
                         <div class="card">
@@ -405,8 +511,13 @@
                                         </div>
 								 </div>
 								 <font color='red'> <DIV id="une3"> </DIV> </font>
-										  <input id="subbtn3" class="btn btn-info btn-fill pull-left" type="button" value="Add Account"/>
-					                      <div class="clearfix"></div>
+										 <div class="row" >
+								  <div class="col-md-2">
+								  	 <input id="subbtn7" type="button" class="btn btn-info btn-fill pull-left" value ="Add Account"/>					             
+								  </div>
+								
+								 </div>
+								 <div class="clearfix"></div>
                                      
 		                          
 		                        </div>
@@ -448,7 +559,6 @@
 
 
 <script>
-
 function validatedoc(){
 	if(document.getElementById("cdoc").files.length == 0)
 	{
@@ -459,9 +569,35 @@ function validatedoc(){
 	return true;
 }
 
+function validatepayslip(){
+	
+	
+	
+	if(document.getElementById("year").value == '')
+	{
+	      document.getElementById('une4').innerHTML = "Please select Year";
+		  document.getElementById("year").focus();
+		  return(false);
+	}
+	
+	if(document.getElementById("month").value == '')
+	{
+	      document.getElementById('une4').innerHTML = "Please select Month";
+		  document.getElementById("month").focus();
+		  return(false);
+	}
+	
+	if(document.getElementById("pdoc").files.length == 0)
+	{
+	      document.getElementById('une4').innerHTML = "Please upload payslip";
+		  document.getElementById("pdoc").focus();
+		  return(false);
+	}
+	return true;
+}
+
 function validatebank(){
 	
-
 	if(document.getElementById("scode").value=="")
 	  {
 	  document.getElementById('une3').innerHTML = "Swift/Sort code cannot be blank";
@@ -483,8 +619,6 @@ function validatebank(){
 	 }
     return true;
 	}
-
-
 function validate(){
 	if(document.getElementById("vcountry").value=='')
 		 {
@@ -507,12 +641,41 @@ function validate(){
 		 return true;
 		 
 }
+function callPayslipemp(employee_id){
 
+document.getElementById("id7").value = employee_id;
+document.getElementById("year").value='';
+document.getElementById("month").value='';
+document.getElementById("pdoc").value="";
+document.getElementById('une4').innerHTML = ""; 		
+ $.ajax(
+    {
+        type: "GET",
+        url: "/employees/returnpayslipemp",
+        data: { employee_id: employee_id ,
+		        year:document.getElementById("year").value
+				},
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+        success: function (payslipdoc) {
+            
+        
+           successpaysliptbl(payslipdoc);
+        
+        },
+       error: function (msg) {
+            
+            
+        }
+    });
+   }
 function callDocemp(employee_id){
-
 document.getElementById("id3").value = employee_id;
-
- 	
+document.getElementById('une1').innerHTML = ""; 
+$('#cdoc').val(''); 
+document.getElementById("documenttype").selectedIndex = 0;	
+	
  $.ajax(
     {
         type: "GET",
@@ -535,10 +698,13 @@ document.getElementById("id3").value = employee_id;
    }
   
 function callBankemp(employee_id){
-
 document.getElementById("id5").value = employee_id;
-
- 	
+document.getElementById("bankname").selectedIndex = 0;
+document.getElementById("baddress").value = "";	 
+document.getElementById("scode").value = "";	 
+document.getElementById("ifsccode").value = "";	 
+document.getElementById("accountno").value = "";	
+document.getElementById('une3').innerHTML = ""; 			
  $.ajax(
     {
         type: "GET",
@@ -559,12 +725,13 @@ document.getElementById("id5").value = employee_id;
         }
     });
    }
-
 function callVisaemp(employee_id){
-
 document.getElementById("id1").value = employee_id;
-
- 	
+document.getElementById("vcountry").value='';
+document.getElementById("expirydate").value='';
+document.getElementById("visatype").value="";
+document.getElementById("visadoc").value="";
+document.getElementById('une').innerHTML = ""; 		
  $.ajax(
     {
         type: "GET",
@@ -586,22 +753,17 @@ document.getElementById("id1").value = employee_id;
     });
    }
   
-$("#subbtn2").click(function (event) {
-
+$("#subbtn3").click(function (event) {
       if(validatedoc()){  
 	    
         event.preventDefault();
-
         // Get form
         var form = $('#docemp')[0];
-
 		// Create an FormData object
         var data = new FormData(form);
-
 		
 		// disabled the submit button
         
-
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
@@ -618,11 +780,9 @@ $("#subbtn2").click(function (event) {
         
             },
             error: function (e) {
-
                 //$("#result").text(e.responseText);
                 console.log("ERROR : ", e);
                 
-
             }
         });
 	  
@@ -635,23 +795,61 @@ $("#subbtn2").click(function (event) {
 	  
     });
 	
-
-	$("#subbtn1").click(function (event) {
-
-      if(validate()){  
+	
+	$("#subbtn5").click(function (event) {
+      if(validatepayslip()){  
 	    
         event.preventDefault();
-
         // Get form
-        var form = $('#visaemp')[0];
-
+        var form = $('#payslipEmp')[0];
 		// Create an FormData object
         var data = new FormData(form);
-
 		
 		// disabled the submit button
         
-
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/employees/addpayslipemp",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data1) {
+           
+            successpaysliptbl(data1);
+       
+        
+            },
+            error: function (e) {
+                //$("#result").text(e.responseText);
+                console.log("ERROR : ", e);
+                
+            }
+        });
+	  
+	     document.getElementById("year").value='';
+		 document.getElementById("month").value='';
+		 document.getElementById("pdoc").value="";
+         document.getElementById('une4').innerHTML = ""; 		 
+	  
+	  }
+	  
+    });
+	
+	
+	$("#subbtn1").click(function (event) {
+      if(validate()){  
+	    
+        event.preventDefault();
+        // Get form
+        var form = $('#visaemp')[0];
+		// Create an FormData object
+        var data = new FormData(form);
+		
+		// disabled the submit button
+        
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
@@ -668,11 +866,9 @@ $("#subbtn2").click(function (event) {
         
             },
             error: function (e) {
-
                 //$("#result").text(e.responseText);
                 console.log("ERROR : ", e);
                 
-
             }
         });
 	  
@@ -685,12 +881,11 @@ $("#subbtn2").click(function (event) {
 	  }
 	  
     });
-	$("#subbtn3").click(function (event) {
+	$("#subbtn7").click(function (event) {
     
       if(validatebank()){  
 	    
         event.preventDefault();
-
         // Get form
         var form = $('#bankemp')[0];
         
@@ -698,12 +893,23 @@ $("#subbtn2").click(function (event) {
         var data = new FormData(form);
          
 		
-		// disabled the submit button
+		var lnkurl;
+        var btnval = $("#subbtn7").val();
+		
+		
+		if(btnval == "Add Account"){
+				 lnkurl = "/employees/addbankemp";
+				 
+	    }
+		else{
+			     lnkurl = "/employees/editbankemp/" + document.getElementById("idhd1").value;
+				 
+				
+		}
         
-
         $.ajax({
             type: "POST",
-            url: "/employees/addbankemp",
+            url: lnkurl,
             data: data,
             processData: false,
             contentType: false,
@@ -716,11 +922,9 @@ $("#subbtn2").click(function (event) {
         
             },
             error: function (e) {
-
-                //$("#result").text(e.responseText);
+               
                 console.log("ERROR : ", e);
                 
-
             }
         });
 	  
@@ -731,12 +935,11 @@ $("#subbtn2").click(function (event) {
 			 document.getElementById("ifsccode").value = "";	 
 			 document.getElementById("accountno").value = "";	
              document.getElementById('une3').innerHTML = ""; 			 
-	  
+	         $("#subbtn7").val("Add Account");   
 	  }
 	  
     });
 function successtbl(data1){
-
 		var trHTML = '';
         var tb = document.getElementById('tab1');
 		  while(tb.rows.length > 1) {
@@ -779,7 +982,6 @@ function successtbl(data1){
 						 successtbl(data1);
 				},
 				error: function (e) {
-
 					   console.log("ERROR : ", e);
 				}
 			});
@@ -790,8 +992,6 @@ function successtbl(data1){
 			 }
 		});
 }
-
-
 function successdoctbl(datadoc){
 var trHTML = '';
         var tb = document.getElementById('tab2');
@@ -831,7 +1031,6 @@ var trHTML = '';
 						 successdoctbl(datadoc);
 				},
 				error: function (e) {
-
 					   
 				}
 			});
@@ -841,6 +1040,63 @@ var trHTML = '';
 			   return false;
 			 }
 		});
+}
+
+function successpaysliptbl(datapayslip){
+
+
+var trHTML = '';
+        var tb = document.getElementById('tab4');
+		  while(tb.rows.length > 1) {
+		  tb.deleteRow(1);
+        }  
+       
+          
+             for(var i=0; i<datapayslip.length;i++) { 
+			 var item = datapayslip[i];
+			 var trHTML;
+			
+             trHTML +="<tr>";
+			 trHTML +="<td>" + item.year + "</td>";
+			 trHTML +="<td>" + item.month + "</td>";
+			 if(item.filename != ""){
+			 trHTML +='<td><a href=' + item.filepath + ' target ="_blank">' + item.filename + '</a></td>';
+			 }
+			 else{trHTML += "<td></td>";}
+			 trHTML +="<td>";
+			 trHTML +='<a class ="btnpdelete"><img src="/images/delete.png"></a><input type="hidden" class="itemid" value="'+ item._id +'"/>';
+			 
+			 }  
+			
+       $('#tab4').append(trHTML);
+	   $('.btnpdelete').on('click', function () {
+		 var check = confirm('Are you sure want to inactive this record?');
+			 if (check == true) {
+			 var itemid = $(this).parent().find('.itemid').val();
+			   $.ajax({
+				type: "GET",
+				url: "/employees/inactivepayslip/" + itemid,
+				data: {},
+				processData: false,
+				contentType: false,
+				cache: false,
+				timeout: 600000,
+				success: function (datapayslip) {
+						 successpaysliptbl(datapayslip);
+				},
+				error: function (e) {
+					   
+				}
+			});
+			 
+			 }
+			 else{
+			   return false;
+			 }
+		});
+		
+		
+		
 }
 
 function successbanktbl(bankdata){
@@ -860,6 +1116,8 @@ var trHTML = '';
 			 trHTML +="<td>" + item.ifsccode + "</td>";
 			 trHTML +="<td>" + item.accountno + "</td>";
 			 trHTML +="<td>";
+			  
+			 trHTML +='&nbsp;&nbsp; <a class ="btnbankedit"><img src="/images/edit.png"></a><input type="hidden" class="bankitemid" value="'+ item._id +'"/>';
 			 trHTML +='&nbsp;&nbsp; <a class ="btnbankdelete"><img src="/images/delete.png"></a><input type="hidden" class="bankitemid" value="'+ item._id +'"/></td>';
 			 }  
 			
@@ -880,7 +1138,6 @@ var trHTML = '';
 						 successbanktbl(databank);
 				},
 				error: function (e) {
-
 					   
 				}
 			});
@@ -890,9 +1147,43 @@ var trHTML = '';
 			   return false;
 			 }
 		});
+		
+		$('.btnbankedit').on('click', function () {
+		     
+			 
+			 var itemid = $(this).parent().find('.bankitemid').val();
+			   $.ajax({
+				type: "GET",
+				url: "/employees/fetchbankemp/" + itemid,
+				data: {},
+				processData: false,
+				contentType: false,
+				cache: false,
+				timeout: 600000,
+				success: function (data1) {
+				 var item = data1;
+				    $('#idhd1').val(item._id);
+					
+                    $('#bank').val(item.bankname_id);	
+					$('#baddress').val(item.address);	
+					$('#officeno').val(item.officeno);	
+					$('#scode').val(item.scode);
+                    $('#ifsccode').val(item.ifsccode);					
+					$('#accountno').val(item.accountno);
+                    $("#subbtn7").val('Update Account');					
+									
+				},
+				error: function (e) {
+
+					   console.log("ERROR : ", e);
+				}
+			});
+			 
+			 
+		});
+		
+		
 }
-
-
 $('.close').on('click', function () {
 		        $.ajax({
 				type: "GET",
@@ -904,35 +1195,78 @@ $('.close').on('click', function () {
 				timeout: 600000,
 				
 				error: function (e) {
-
 					   console.log("ERROR : ", e);
 				}
 			});
 			 
 			 
 		});
-
+		
+		
+    $year = $('#year');
+    
+	
+	$year.change(function() {
+    
+     var tb = document.getElementById('tab4');
+		  while(tb.rows.length > 1) {
+		  tb.deleteRow(1);
+        }
+	
+	 
+     var year = document.getElementById("year").value;
+	 var employee_id = document.getElementById("id7").value
+	 
+	 
+        $.ajax({
+          method: "GET",
+          url: "/employees/returnpayslipemp",
+          data: { employee_id: employee_id ,
+		          year:year
+				},
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          cache: false,
+          success: function (payslipdoc) {
+            
+        
+            successpaysliptbl(payslipdoc);
+        
+        },
+       error: function (msg) {
+            
+            
+         }
+       });
+		  
+	
+  
+	});	
+		
 $.noConflict();
 jQuery( document ).ready(function( $ ) {
     $('#myTable').DataTable();
-
  $('tr').each(function(){
            if($(this).find('td:last').text().trim() === "Active"){
 		   
-              $(this).css('background','#BCBABE');
+             
+			  
+			  $(this).css('background','rgb(114, 171, 220)');
           }
 		  if($(this).find('td:last').text().trim() === "Inactive"){
 		   
-		      $(this).css('background','#F9F9C3');
+		      $(this).css('background','#BCBABE');
 			  }
 		 
 		  
         });
-
 	
 });
  
-
+ 
+ 
+ 
+ 
 // Code that uses other library's $ can follow here.
 </script>
 
@@ -942,12 +1276,3 @@ jQuery( document ).ready(function( $ ) {
 <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
 <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
 <script src="/javascripts/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-
-
-
-
-
-
-
-

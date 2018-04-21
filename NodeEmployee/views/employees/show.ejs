@@ -7,7 +7,6 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet" />
-    <link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -15,10 +14,14 @@
       <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
-	<link href="/stylesheets/main.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-	
+	<link href="/stylesheets/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet" />
+	<link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="/stylesheets/animate.min.css" rel="stylesheet"/>
+    <link href="/stylesheets/main.css" rel="stylesheet" />
 	
 	
 </head>
@@ -72,16 +75,28 @@
             </nav>
         </div>
 		
-		<div class="main-panel">
-           <nav class="navbar navbar-default navbar-fixed">
-              <div class="container-fluid">
+		<div class="main-panel" data-color="orange" >
+        <nav class="navbar navbar-default navbar-fixed" >
+            <div class="container-fluid">
+	    <!--added new -->
+	    	<div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"></a>
+                </div>
+	   <!--added new -->
                 <div  align="right">
                    <a href="">Account</a>
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                    <a href="#">Log out</a>
                 </div>
-              </div>
-	       </nav>
+            </div>
+			
+		</nav>
         
         
           <div class="container-fluid">
@@ -108,18 +123,34 @@
 							 <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
+                                                <label>DOB</label>
+                                                <input type="date" class="form-control" id="dateofbirth" disabled value="<%= employee.dateofbirth %>">
+                                            </div>
+                                        </div>
+										 <div class="col-md-4">
+                                             <div class="form-group">
                                                 <label>Address</label>
                                                 <input type="text" class="form-control" disabled value="<%= employee.address %>">
                                             </div>
                                         </div>
-										 <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Office Location</label>
-                                                <input type="text" class="form-control" disabled value="<%= employee.officelocation %>">
-                                            </div>
-                                        </div>
                              </div>
 							 <div class="row">
+										<div class="col-md-4">
+                                        <div class="form-group">
+                                                <label>Postal Code </label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.postalcode %>">
+                                        </div>
+                                   </div>
+								   <div class="col-md-4">
+									 <div class="form-group">
+                                                <label>Nationality</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.nationality %>">
+                                            </div>
+                                   </div>	
+                                </div>
+								
+								
+								 <div class="row">
 										<div class="col-md-4">
                                       <div class="form-group">
                                            <label>Country</label>
@@ -133,58 +164,87 @@
 									   </div>
                                    </div>	
                                 </div>
-							 <div class="row">
+														
+                              <div class="row">
+                                       
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>DOB</label>
-                                                <input type="date" class="form-control" id="dateofbirth" disabled value="<%= employee.dateofbirth %>">
+                                                <label>Gender</label>
+                                               
+												 <input type="checkbox" id="GC1"
+												   name="gender" value="Female">
+												  <label>Female</label>
+
+												  <input type="checkbox" 
+												   name="gender" value="Male" id="GC2">
+												  <label>Male</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+										 <div class="col-md-4">
                                             <div class="form-group">
+                                                <label>Office Location</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.office %>">
+											</div>
+                                        </div>
+									
+                                </div>		
+                            
+							
+			                 <div class="row">
+                                        <div class="col-md-4">
+                                             <div class="form-group">
                                                 <label>Passport/IC No *</label>
                                                 <input type="text" class="form-control" disabled value="<%= employee.passportno %>">
                                             </div>
                                         </div>
-                             </div>	
-							 
-							 <div class="row">
                                         <div class="col-md-4">
-                                           <div class="form-group">
-                                                <label>Date Of Joining *</label>
+                                             <div class="form-group">
+                                                <label>Date Of Joining</label>
                                                 <input type="date" class="form-control" disabled id="dateofjoining"  value="<%= employee.dateofjoining %>">
                                             </div>
                                         </div>
+                             </div>			
+							 <div class="row" id="divs">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Nationality</label>
-                                                <input type="text" class="form-control" disabled value="<%= employee.nationality %>">
+                                                <label>Designation</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.designation %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>WorkPermit Status</label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.permitstatus %>">
                                             </div>
                                         </div>
                              </div>	
-
-                             <div class="row">
-                                        <div class="col-md-4">
+								
+								<div class="row">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Marrital Status</label>
-												<input type="radio" id="ms1"
-												   name="maritalstatus" value="married" onclick="show();">
-												  <label for="ms1">Married</label>
-
-												  <input type="radio" id="ms2"
-												   name="maritalstatus" value="unmarried" onclick="hide();">
-												  <label for="ms2">Unmarried</label>
-                                            </div>
+                                                <label>Marital Status </label>
+												 <div><input type="checkbox" id="MS1"
+												   name="maritalstatus" value="Married">
+												  <label>Married</label>
+												  <input type="checkbox" id="MS2" 
+												   name="maritalstatus" value="Unmarried">
+												  <label>Unmarried</label>
+												  <input type="checkbox" id="MS3"
+												   name="maritalstatus" value="Divorced">
+												  <label>Divorced</label>
+												  <input type="checkbox" id="MS4"
+												   name="maritalstatus" value="Separated">
+												  <label>Separated</label>
+												  <input type="checkbox" id="MS5"
+												   name="maritalstatus" value="Widow">
+												  <label>Widow</label>
+												  <input type="checkbox" id="MS6"
+												   name="maritalstatus" value="Registerd Partnership">
+												  <label>Registerd Partnership</label></div>                                            </div>
                                         </div>
-								 
-								 <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>WorkPermit Status</label>
-												<input type="text" class="form-control" disabled value="<%= employee.permitstatus %>">
-                                            </div>
-                                        </div>
-                             </div>
-                             <div class="row">
+										
+								 </div>
+								 <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Comments</label>
@@ -192,9 +252,7 @@
                                             </div>
                                         </div>
                                  </div>
-							 
-							
-			                 <div class="row">
+						          <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Father Name</label>
@@ -212,21 +270,68 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Spouse Name</label>
-                                                <input type="text" class="form-control" disabled id="spousename" >
+                                                <input type="text" class="form-control" disabled value="<%= employee.spousename %>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>No Of Kids</label>
-                                                <input type="number" class="form-control" disabled id="noofkids">
+                                                <input type="number" class="form-control" disabled value="<%= employee.noofkids %>">
                                             </div>
                                         </div>
                              </div>	
-								
-								
-								
-						     
-							 
+								<div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Main Contact No </label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.mcontactno %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Emergency Contact No </label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.econtactno %>">
+                                            </div>
+                                        </div>
+										
+										
+                                </div>	
+							 <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Have you previously worked for Safe Lanes </label>
+												 <div><input type="checkbox" id="WS1"
+												   name="workstatus" value="Yes">
+												  <label>Yes</label>
+												  <input type="checkbox" id="WS2"
+												   name="workstatus" value="Job Title">
+												  <label>Job Title</label>
+												  <input type="checkbox" id="WS3"
+												   name="workstatus" value="Employee">
+												  <label>Employee</label>
+												  <input type="checkbox" id="WS4"
+												   name="workstatus" value="Fixed Term Employee">
+												  <label>Fixed Term Employee</label>
+												  <input type="checkbox" id="WS5"
+												   name="workstatus" value="Contractor/Temp">
+												  <label>Contractor/Temp</label>
+												  <input type="checkbox" id="WS6"
+												   name="workstatus" value="No">
+												  <label>No</label></div>                                            </div>
+                                        </div>
+										
+								 </div>
+								  <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Can you provide your former ID Number </label>
+                                                <input type="text" class="form-control" disabled value="<%= employee.fidno %>">
+                                            </div>
+                                        </div>
+                                       
+										
+										
+                                </div>	
 							   <h3><a id="edit12" href="/employees/edit/<%= employee._id%>" class="btn btn-info btn-fill pull-right">EDIT</a></h3>
                                 <form action="/employees/inactive/<%= employee._id%>" method="post">
                                 <button type="submit" id="btnInActive" class="btn btn-info btn-fill pull-right" onclick="return confirm('Are you sure want to do?')">Inactive</button>
@@ -238,16 +343,16 @@
 						 </div>
                        </div>
 					   
-					   <div class="container">
+					  
 					     <div class="col-md-4" style="padding-left: 0px;  padding-right: 0px;">
 						 <% if ( employee.photo != null ) { %>
                             <img src="<%= employee.photo %>" class="img-responsive">
-							<h4 class="title"><%= employee.firstname %><br/>
+							<h4 class="title"><%= employee.firstname %> <%= employee.lastname %><br/>
 						 <% }else { %>
 						 <h4 class="title">Photo Not Uploaded<br/>
 						 <% } %>
                          </div>
-                       </div>
+                       
 					   
 					  
 					 
@@ -259,7 +364,7 @@
 <script type="text/javascript">
 
  
- $( document ).ready(function() {
+ jQuery( document ).ready(function( $ ) {
   
      $('#comment').val('<%= employee.comment %>');
   
@@ -275,21 +380,46 @@
   if('<%=employee.maritalstatus%>'!=null)
        {
 	   
-           if('<%=employee.maritalstatus%>'=="married"){
-		   
-              document.getElementById('ms1').checked=true;
-			  document.getElementById('divs').style.display ='block';
-              document.getElementById('spousename').value= '<%=employee.spousename%>' ;
-              document.getElementById('noofkids').value= '<%=employee.noofkids%>' ;
-             }
-          else
-           {
-             document.getElementById('ms2').checked=true;
-			 document.getElementById('divs').style.display = 'none';
-             
-           }
-       }
+           if('<%=employee.maritalstatus%>'=="Married")		   
+              document.getElementById('MS1').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Unmarried")	
+             document.getElementById('MS2').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Divorced")	
+		      document.getElementById('MS3').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Separated")	
+             document.getElementById('MS4').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Widow")	
+		      document.getElementById('MS5').checked=true;
+		   else if('<%=employee.maritalstatus%>'=="Registerd Partnership")	
+		      document.getElementById('MS6').checked=true;
+		}
+     
+
+  if('<%=employee.gender%>'!=null)
+       {
 	   
+           if('<%=employee.gender%>'=="Female")		   
+              document.getElementById('GC1').checked=true;
+		   else if('<%=employee.gender%>'=="Male")	
+             document.getElementById('GC2').checked=true;
+		}	 
+	
+  if('<%=employee.workstatus%>'!=null)
+       {
+	       if('<%=employee.workstatus%>'=="Yes")		   
+              document.getElementById('WS1').checked=true;
+		   else if('<%=employee.workstatus%>'=="Job Title")	
+             document.getElementById('WS2').checked=true;
+		   else if('<%=employee.workstatus%>'=="Employee")	
+		      document.getElementById('WS3').checked=true;
+		   else if('<%=employee.workstatus%>'=="Fixed Term Employee")	
+             document.getElementById('WS4').checked=true;
+		   else if('<%=employee.workstatus%>'=="Contractor/Temp")	
+		      document.getElementById('WS5').checked=true;
+		   else if('<%=employee.workstatus%>'=="No")	
+		      document.getElementById('WS6').checked=true;
+		}
+	
   if('<%=employee.status%>'!= 'Active'){
  
       document.getElementById('btnInActive').innerHTML="Active";
@@ -303,5 +433,10 @@
 
 </script>						 
        
-					   
+<script src="/javascripts/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="/javascripts/chartist.min.js"></script>
+<script src="/javascripts/bootstrap-notify.js"></script>
+<script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> -->
+<script src="/javascripts/light-bootstrap-dashboard.js?v=1.4.0"></script>     					   
                      
