@@ -88,7 +88,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"></a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
 	   <!--added new -->
                 <div  align="right">
@@ -101,94 +101,12 @@
 		
         <div class="content">
             <div class="container-fluid">
-               <div class="row">
-                  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Select Year *</label>
-                        <select name="year" class="form-control" id="year">
-<<<<<<< HEAD
-						 
-						 <% for(var i=0; i < year.length; i++){ %>
-							<option value='<%= year[i].name %>'><%= year[i].name %></li>
-                         <% } %>
-								        
-=======
-						 <option value="All">All</option>
-						 <option value="2017">2017</option>
-				     	 <option value="2018">2018</option>
-						 <option value="2019">2019</option>
-						 <option value="2020">2020</option>
-						 <option value="2021">2021</option>
-						 <option value="2022">2022</option>
->>>>>>> 2a3c5f8f8ce0486e21a8ea0ae5848540bc0abdf3
-						</select>
-				    </div>
-                  </div>
-				  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Select Type</label>
-                        <select name="type" class="form-control" id="type">
-						<option value=''>Select</option>
-						<option value="Monthly">Monthly</option>
-						<option value="Quarterly">Quarterly</option>
-						</select>
-                    </div>
-                  </div>
-				  <div class="col-md-2">
-                    <div class="form-group">
-                      <label>Select Month</label>
-                         <select name="month" class="form-control" id="month">
-						   <option value=''>Select</option>
-				           <option value="January">January</option>
-				     	   <option value="February">February</option>
-						   <option value="March">March</option>
-						   <option value="April">April</option>
-						   <option value="May">May</option>
-						   <option value="June">June</option>
-						   <option value="July">July</option>
-						   <option value="August">August</option>
-						   <option value="September">September</option>
-						   <option value="October">October</option>
-						   <option value="November">November</option>
-						   <option value="December">December</option>
-                         </select>
-					</div>
-                  </div>
-								   
-								   
-				  <div class="col-md-2">
-                    <div class="form-group">
-                        <label>Select Quarter</label>
-                            <select name="quarter" class="form-control" id="quarter">
-							<option value=''>Select</option>
-				            <option value="Q1">Q1</option>
-							<option value="Q2">Q2</option>
-							<option value="Q3">Q3</option>
-							<option value="Q4">Q4</option>
-							</select>
-                    </div>
-                  </div>
-			   </div>
-								   
-								   
-								  
-			    <div class ="row">
-				   <div class="col-md-2"></div>
-				   <div class="col-md-2"></div>
-				   <div class="col-md-2"></div>
-				   <div class="col-md-2"></div>
-				   <div class="col-md-2">
-				        <button id="btnGenerate" class="btn btn-small pull-left">Generate</button>
-				   </div>
-				</div>
-								   
-								   
-			   
+              <!-- <img src="/images/DashboardShip.png" width=100% height=100% /> -->
               <div class="row">
                   <div class="col-md-4 col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading clearfix">
-                            <h3>Vessel Job Tracker Analysis</h3>
+                            <h3>VDR Analysis</h3>
                         </div>
                         <div class="panel-body">
                             <div id="piechart" class="chart"></div>
@@ -235,58 +153,20 @@ var w = 300,                        //width
     h = 300,                            //height
     r = 100,                            //radius
     color = d3.scale.category20c();     //builtin range of colors
+
     data = [{"label":"one", "value":20}, 
     {"label":"two", "value":50}, 
     {"label":"three", "value":30}];
     
-	$("#btnGenerate").click(function(){
-	
-	    var type = document.getElementById("type").value; 
-		var month = document.getElementById("month").value;
-		var quarter = document.getElementById("quarter").value;
-		if(type == "Monthly" && month==''){
-		   alert("Please Select the Month");
-		}
-		else if(type == "Quarterly" && quarter==''){
-		    alert("Please Select the Quarter");
-		}
-	
-        loadPie();
-    });
-    
+    loadPie();
+
     $("#btnReset").click(function(){
         loadPie();
     });
+
     function loadPie(){
         $("#piechart").html('');
-		
-		var datetime;
-		var year = document.getElementById("year").value;
-		var month = document.getElementById("month").value;
-		var quarter = document.getElementById("quarter").value;
-		
-		
-		
-		if (month!=''){
-		   datetime = month + "-" + year;
-		
-		}
-		if(quarter!=''){
-		   datetime = quarter + "-" + year;
-		}
-		
-		if(month=='' && quarter=='' && year != '')
-		{
-		   datetime = year;
-		}
-		
-		
-<<<<<<< HEAD
-		
-=======
-		alert(datetime);
->>>>>>> 2a3c5f8f8ce0486e21a8ea0ae5848540bc0abdf3
-        $.get('/d3sample/datetime', function(res) {
+        $.get('/d3sample', function(res) {
             console.log(res);
             var fdata = JSON.parse(res);
             console.log(fdata.length);
@@ -294,7 +174,9 @@ var w = 300,                        //width
         
         });
     }
+
 function renderPieChart(fdata) {
+
     var vis = d3.select("#piechart")
                 .append("svg:svg")              //create the SVG element inside the <body>
                 .data([fdata])                   //associate our data with the document
@@ -302,18 +184,23 @@ function renderPieChart(fdata) {
                     .attr("height", h)
                 .append("svg:g")                //make a group to hold our pie chart
                     .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+
                 var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
                 .outerRadius(r);
+
                 var pie = d3.layout.pie()           //this will create arc data for us given a list of values
                 .value(function(d) { return d.yearCount; });    //we must tell it out to access the value of each element in our data array
+
                 var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
                 .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
                 .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
                     .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
                         .attr("class", "slice");    //allow us to style things in the slices (like text)
+
                 arcs.append("svg:path")
                         .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
                         .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+
                 arcs.append("svg:text")                                     //add a label to each slice
                         .attr("transform", function(d) {                    //set the label's origin to the center of the arc
                         //we have to make sure to set these before calling arc.centroid
@@ -329,8 +216,10 @@ function renderPieChart(fdata) {
         renderPieChartQuartely(fdata[i].quarterlist);
     })
 }
-function renderPieChartQuartely(quarterData) {
 
+
+function renderPieChartQuartely(quarterData) {
+alert(quarterData.length);
 $("#piechart").html('');
 var vis1 = d3.select("#piechart")
             .append("svg:svg")              //create the SVG element inside the <body>
@@ -339,18 +228,23 @@ var vis1 = d3.select("#piechart")
                 .attr("height", h)
             .append("svg:g")                //make a group to hold our pie chart
                 .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+
             var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
             .outerRadius(r);
+
             var pie = d3.layout.pie()           //this will create arc data for us given a list of values
             .value(function(d) { return d.quarterCount; });    //we must tell it out to access the value of each element in our data array
+
             var arcs = vis1.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
             .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
             .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
                 .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
                     .attr("class", "slice");    //allow us to style things in the slices (like text)
+
             arcs.append("svg:path")
                     .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
                     .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+
             arcs.append("svg:text")                                     //add a label to each slice
                     .attr("transform", function(d) {                    //set the label's origin to the center of the arc
                     //we have to make sure to set these before calling arc.centroid
@@ -360,14 +254,17 @@ var vis1 = d3.select("#piechart")
                 })
                 .attr("text-anchor", "middle")                          //center the text on it's origin
                 .text(function(d, i) { return quarterData[i].quarter; });        //get the label from our original data array
+
         
     vis1.selectAll("g.slice").on('click', function(d, i){
         alert(quarterData[i].quarterCount);
         renderPieChartMonthly(quarterData[i].monthlist);
     })                
 }
-function renderPieChartMonthly(monthData) {
 
+
+function renderPieChartMonthly(monthData) {
+alert(monthData.length);
 $("#piechart").html('');
 var vis1 = d3.select("#piechart")
             .append("svg:svg")              //create the SVG element inside the <body>
@@ -376,18 +273,23 @@ var vis1 = d3.select("#piechart")
                 .attr("height", h)
             .append("svg:g")                //make a group to hold our pie chart
                 .attr("transform", "translate(" + r + "," + r + ")")    //move the center of the pie chart from 0, 0 to radius, radius
+
             var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
             .outerRadius(r);
+
             var pie = d3.layout.pie()           //this will create arc data for us given a list of values
             .value(function(d) { return d.monthCount; });    //we must tell it out to access the value of each element in our data array
+
             var arcs = vis1.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
             .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
             .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
                 .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
                     .attr("class", "slice");    //allow us to style things in the slices (like text)
+
             arcs.append("svg:path")
                     .attr("fill", function(d, i) { return color(i); } ) //set the color for each slice to be chosen from the color function defined above
                     .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
+
             arcs.append("svg:text")                                     //add a label to each slice
                     .attr("transform", function(d) {                    //set the label's origin to the center of the arc
                     //we have to make sure to set these before calling arc.centroid
@@ -399,54 +301,4 @@ var vis1 = d3.select("#piechart")
                 .text(function(d, i) { return monthData[i].month; });        //get the label from our original data array
 }
 
-
-jQuery( document ).ready(function( $ ) {
-   $("#year").val('All');
-   
-    
-	$type = $('#type');
-    $type.change(function() {
-       
-	   var value = document.getElementById("type").value;
-	    $("#quarter").prop("disabled", false);	   
-		$("#month").prop("disabled", false);
-	   
-	   if (value == "Monthly")
-	       $("#quarter").prop("disabled", true);
-		   
-       else if(value == "Quarterly")
-	       $("#month").prop("disabled", true);
-	   else if(value == ''){
-           $("#quarter").prop("disabled", true);	   
-		   $("#month").prop("disabled", true);
-		}
-		   
-	
-    }).change();
-
-	
-	$year = $('#year');
-    $year.change(function() {
-       
-	   var value = document.getElementById("year").value;
-	    if(value == "All"){
-		
-			$("#type").prop("disabled", true);
-	    }
-	    else{
-			
-			$("#type").prop("disabled", false);
-	    }
-		   
-	
-    }).change();
-	
-	loadPie();
-	
-});
-
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> 2a3c5f8f8ce0486e21a8ea0ae5848540bc0abdf3

@@ -5,9 +5,13 @@ var router      = express.Router();
 var mongodb     = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
+<<<<<<< HEAD
 /*var dburl = "mongodb://localhost/shipping";*/
+=======
+var dburl = "mongodb://pragyanAG:pragyan123@ds059365.mlab.com:59365/shippingtest";
+>>>>>>> 2a3c5f8f8ce0486e21a8ea0ae5848540bc0abdf3
 
-var dburl = "mongodb://safe:safe123@localhost/safelanes";
+/*var dburl = "mongodb://safe:safe123@localhost/safelanes";*/
 
 
 /* GET products listing. */
