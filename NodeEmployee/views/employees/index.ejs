@@ -363,7 +363,7 @@
 			                          <div class="row">
                                        <div class="col-md-2">
                                          <div class="form-group">
-                                           <label>Type of Documents *</label>
+                                           <label>Year *</label>
                                                  <select name="year" class="form-control" id="year">
 						                             <option value=''>Select</option>
 													 <% for(var i=0; i < year.length; i++){ %>
@@ -675,6 +675,7 @@ document.getElementById("id3").value = employee_id;
 document.getElementById('une1').innerHTML = ""; 
 $('#cdoc').val(''); 
 document.getElementById("documenttype").selectedIndex = 0;	
+sortSelect(document.getElementById("documenttype"), 'text', 'asc'); 
 	
  $.ajax(
     {
@@ -704,7 +705,8 @@ document.getElementById("baddress").value = "";
 document.getElementById("scode").value = "";	 
 document.getElementById("ifsccode").value = "";	 
 document.getElementById("accountno").value = "";	
-document.getElementById('une3').innerHTML = ""; 			
+document.getElementById('une3').innerHTML = ""; 
+sortSelect(document.getElementById("bankname"), 'text', 'asc'); 			
  $.ajax(
     {
         type: "GET",
@@ -980,6 +982,8 @@ function successtbl(data1){
 				timeout: 600000,
 				success: function (data1) {
 						 successtbl(data1);
+						 
+						 
 				},
 				error: function (e) {
 					   console.log("ERROR : ", e);
@@ -1029,6 +1033,7 @@ var trHTML = '';
 				timeout: 600000,
 				success: function (datadoc) {
 						 successdoctbl(datadoc);
+						 						 
 				},
 				error: function (e) {
 					   
@@ -1083,6 +1088,7 @@ var trHTML = '';
 				timeout: 600000,
 				success: function (datapayslip) {
 						 successpaysliptbl(datapayslip);
+						
 				},
 				error: function (e) {
 					   
@@ -1136,6 +1142,13 @@ var trHTML = '';
 				timeout: 600000,
 				success: function (databank) {
 						 successbanktbl(databank);
+						 document.getElementById("bankname").selectedIndex = 0;
+						 document.getElementById("baddress").value = "";	 
+						 document.getElementById("scode").value = "";	 
+						 document.getElementById("ifsccode").value = "";	 
+						 document.getElementById("accountno").value = "";	
+						 document.getElementById('une3').innerHTML = ""; 			 
+						 $("#subbtn7").val("Add Account"); 
 				},
 				error: function (e) {
 					   
@@ -1242,7 +1255,27 @@ $('.close').on('click', function () {
 	
   
 	});	
-		
+
+var sortSelect = function (select, attr, order) {
+    if(attr === 'text'){
+        if(order === 'asc'){
+            $(select).html($(select).children('option').sort(function (x, y) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            
+        }// end asc
+        if(order === 'desc'){
+            $(select).html($(select).children('option').sort(function (y, x) {
+                return $(x).text().toUpperCase() < $(y).text().toUpperCase() ? -1 : 1;
+            }));
+            $(select).get(0).selectedIndex = 0;
+            e.preventDefault();
+        }// end desc
+    }
+
+};
+	
 $.noConflict();
 jQuery( document ).ready(function( $ ) {
     $('#myTable').DataTable();

@@ -296,6 +296,12 @@ router.post('/addvisaemp',upload.any(),function(req, res, next){
 	console.log("start");
 	console.log(req.body.id1);
 	console.log(req.files);
+	
+	var dir = './public/uploads/employeerecords/'+ req.body.id1 ;
+	    
+	    if (!fs.existsSync(dir))
+		 filessystem.mkdirSync(dir);
+	
 	if(req.files.length>0){
 		console.log("start insert1");
 	  var dir1 = './public/uploads/employeerecords/'+ req.body.id1 + '/visadocuments';
@@ -798,6 +804,12 @@ router.post('/addpayslipemp',upload.any(),function(req, res, next){
 	console.log(req.body.id7);
 	console.log(req.body);
 	
+	
+	var dir = './public/uploads/employeerecords/'+ req.body.id7 ;
+	    
+	     if (!fs.existsSync(dir))
+		 filessystem.mkdirSync(dir);
+	 
 	if(req.files.length>0){
 		console.log("start insert1");
 	  var dir1 = './public/uploads/employeerecords/'+ req.body.id7 + '/payslips';

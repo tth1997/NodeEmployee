@@ -483,6 +483,8 @@ cleardata();
 				timeout: 600000,
 				success: function (data1) {
 						 successtbl(data1);
+						 cleardata();
+			             document.getElementById('mail-container').style.display = 'none';
 				},
 				error: function (e) {
 
@@ -618,7 +620,7 @@ $("#subbtn1").click(function (event) {
    
    $("#subbtn2").click(function (event) {
             cleardata();
-			document.getElementById('mail-container').style.display = 'none'
+			document.getElementById('mail-container').style.display = 'none';
    
    });
    

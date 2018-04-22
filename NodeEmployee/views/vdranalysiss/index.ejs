@@ -19,6 +19,9 @@
 	
 	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">  
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -287,10 +290,23 @@ jQuery( document ).ready(function( $ ) {
     <% for(var i=0; i<vdranalysiss.length;i++) { %>
 		 if ('<%=vdranalysiss[i].status%>' == "completed" && 
 		 '<%=vdranalysiss[i].alldocrcvd%>' != null && '<%=vdranalysiss[i].duedate%>' != null){	
-		   
-	         var newduedt = addWorkDays(new Date('<%=vdranalysiss[i].alldocrcvd%>'),14);
-              
-			  if(newduedt == '<%=vdranalysiss[i].duedate%>'){
+		    
+			
+			
+			 
+			var duedate = '<%=vdranalysiss[i].duedate%>';
+			var dt1 = new Date(duedate);
+			var firstdate = $.datepicker.formatDate('yy-mm-dd',dt1);
+			 
+	         var seconddate = addWorkDays(new Date('<%=vdranalysiss[i].alldocrcvd%>'),14);
+             
+			
+			var dt2 = new Date(seconddate);
+			var seconddate = $.datepicker.formatDate('yy-mm-dd',dt2);
+			 
+			 
+			
+			  if(firstdate == seconddate){
 	              $('#myTable2').find('tr:contains(<%=vdranalysiss[i].vdr_id%>)').css('background','#9ACD32');
 				  $('#myTable1').find('tr:contains(<%=vdranalysiss[i].vdr_id%>)').css('background','#9ACD32');
 				  }

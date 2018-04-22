@@ -22,7 +22,8 @@ var VdrAnalysisSchema = new mongoose.Schema({
   dtcomp: Date,
   duedate: Date,
   remarks: String,
-  status: String  
+  status: String,
+  inserted_at: { type: Date, default: Date.now }
 });
 
 
