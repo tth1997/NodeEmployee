@@ -290,7 +290,7 @@ jQuery( document ).ready(function( $ ) {
 		   
 	         var newduedt = addWorkDays(new Date('<%=vdranalysiss[i].alldocrcvd%>'),14);
               
-			  if(newduedt == '<%=vdranalysiss[i].duedate%>'){
+			  if(newduedt == new Date('<%=vdranalysiss[i].duedate%>')){
 	              $('#myTable2').find('tr:contains(<%=vdranalysiss[i].vdr_id%>)').css('background','#9ACD32');
 				  $('#myTable1').find('tr:contains(<%=vdranalysiss[i].vdr_id%>)').css('background','#9ACD32');
 				  }
