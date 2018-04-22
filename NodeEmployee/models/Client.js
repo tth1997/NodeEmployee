@@ -10,12 +10,13 @@ var ClientSchema = new mongoose.Schema({
   postalcode: String,
   officeno: {
 	  type:[String],
-	  usePushEach: true},
+  },
   website: String,
   status: String,
-  inserted_at: { type: Date, default: Date.now }
+  inserted_at: { type: Date, default: Date.now },
+},{ usePushEach: true });
   
-});
+
 
 
 module.exports = mongoose.model('Client', ClientSchema,'clients');

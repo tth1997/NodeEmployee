@@ -6,11 +6,12 @@ var ClientContactSchema = new mongoose.Schema({
 	designation: String,
 	email: {
 	  type:[String],
-	  usePushEach: true},
+	  },
 	officeno: String,
 	mobileno: String,
-	status: String
+    status: String},
+ { usePushEach: true });
 	
-});
+
 
 module.exports = mongoose.model('ClientContact', ClientContactSchema,'clientcontact');

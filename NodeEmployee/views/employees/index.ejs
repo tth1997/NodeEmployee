@@ -133,10 +133,10 @@
 			
 			                    <% for(var i=0; i<employees.length;i++) { %>
                                    <tr>
-								     <td> <a data-toggle="modal" href="#myModal" class="pull-left"><img src='/images/Visa.png' title="Add Visa" align="left" hspace="10" onclick="callVisaemp('<%= employees[i].employee_id%>');"/></a>
-									      <a data-toggle="modal" href="#bankModal" class="pull-left"><img src='/images/bank.png' title="Add Bank" align="left" hspace="10" onclick="callBankemp('<%= employees[i].employee_id%>');"/></a>
-										 <a data-toggle="modal" href="#docModal" class="pull-left"><img src='/images/adddocs.png' title="Add Documents" align="left" hspace="10" onclick="callDocemp('<%= employees[i].employee_id%>');"/></a>
-										 <a data-toggle="modal" href="#payslipModal" class="pull-left"><img src='/images/Payslip.png' title="Add Payslips" align="left" hspace="10" onclick="callPayslipemp('<%= employees[i].employee_id%>');"/></a>
+								     <td> <a data-toggle="modal" href="#myModal" class="pull-left"><img src='/images/Visa.png' title="Add Visa" align="left" hspace="5" onclick="callVisaemp('<%= employees[i].employee_id%>');"/></a>
+									      <a data-toggle="modal" href="#bankModal" class="pull-left"><img src='/images/bank.png' title="Add Bank" align="left" hspace="5" onclick="callBankemp('<%= employees[i].employee_id%>');"/></a>
+										 <a data-toggle="modal" href="#docModal" class="pull-left"><img src='/images/adddocs.png' title="Add Documents" align="left" hspace="5" onclick="callDocemp('<%= employees[i].employee_id%>');"/></a>
+										 <a data-toggle="modal" href="#payslipModal" class="pull-left"><img src='/images/Payslip.png' title="Add Payslips" align="left" hspace="5" onclick="callPayslipemp('<%= employees[i].employee_id%>');"/></a>
                                     <td><a href="/employees/show/<%= employees[i]._id%>"><%= employees[i].employee_id%></a></td>
 									<td><%= employees[i].firstname%> <%= employees[i].lastname%> </td>
                                     <td><%= employees[i].passportno%></td>
