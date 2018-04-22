@@ -130,9 +130,10 @@ router.post('/save',upload.any(),function(req, res,next) {
             status:'Active'
             
             });
-	 if(vdranalysis.drcvclient != null)
+	if(vdranalysis.drcvclient != null)
 	 {
-	   vdranalysis.drcvclient = vdranalysis.drcvclient.toLocaleDateString("en-US");
+	   vdranalysis.drcvclient = new Date(vdranalysis.drcvclient);
+	   vdranalysis.drcvclient = vdranalysis.drcvclient.toISOString();
 	 }
 	 if(vdranalysis.alldocrcvd != null)
 	 {
@@ -160,7 +161,8 @@ router.post('/save',upload.any(),function(req, res,next) {
 	 }
 	 if(vdranalysis.duedate != null)
 	 {
-	   vdranalysis.duedate = vdranalysis.duedate.toLocaleDateString("en-US");
+	   vdranalysis.duedate = new Date(vdranalysis.duedate);
+	   vdranalysis.duedate = vdranalysis.duedate.toISOString();
 	 }
 	   
 	   var dir = './public/uploads/vdrjobtrackers/'+ vdranalysis.vdr_id ;
