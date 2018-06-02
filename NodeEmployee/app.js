@@ -18,7 +18,7 @@ var objMasterPhoneCode = {};
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://safe:safe123@localhost/safelanes')
+mongoose.connect('mongodb://localhost/shipping')
   .then(() =>  console.log('connection succesful'))
   .catch((err) => console.error(err));
 
